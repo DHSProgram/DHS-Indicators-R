@@ -20,7 +20,6 @@
 # fp_demand_tot   "Total demand -total"
 # fp_demsat_mod   "Demand satisfied by modern methods"
 # fp_demsat_any   "Demand satisfied by any method"
-
 # fp_future_use   "Intention of use of contraception in the future among non-users"
 # -----------------------------------------------------------------------------
 

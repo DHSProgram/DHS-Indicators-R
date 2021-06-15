@@ -3,8 +3,8 @@
 # Purpose: 			Create Events Files from Calendar Data
 # Data inputs: 		IR data files
 # Data outputs:		Reshaped events file for analysis
-# Author:				Trevor Croft 
-# Date last modified: Mar 5 2019 by Courtney Allen for codeshare project 				
+# Author:				Courtney Allen based on syntax from https://www.dhsprogram.com/data/calendar-tutorial/
+# Date last modified: May 17 2021 by Courtney Allen for codeshare project 				
 # ******************************************************************************
   
 # ------------------------------------------------------------------------------
@@ -56,28 +56,26 @@ episode <- 0
 #gen prev_vcal1 = "_"					 
 	
 # create vars for each month of calendar
-for(j in vcal_len:1) {	
+IRevents <- IRevents %>%
+  for(j in vcal_len:1) {	
   
   i <- vcal_len - j + 1
   			
   # contraceptive method, non-use, or birth, pregnancy, or termination
-  IRevents <- IRevents %>%
     assign(paste0("vcal1_",i), substr(vcal_1,j,1))
 
   # reason for discontinuation
-  IRevents <- IRevents %>%
     assign(paste0("vcal2_",i), substr(vcal_2,j,1))	
          
   # check if we have marriage info
-  IRevents <- IRevents %>%
     if (!is.na(vcal_3)) { 							
   	assign(paste0("vcal3_",i), substr(vcal_3,j,1))
   			
 	# set up parameter to add into reshape below, and collapse further below
 	vcal3_ <- vcal3_							
 	ev906 <- ev906a=vcal3_
-		}
-	  
+    }
+  
 	# increase the episode number if there is a change in vcal_1
 	IRevents <- IRevents %>%
 	  if vcal1_`i' != prev_vcal1 {

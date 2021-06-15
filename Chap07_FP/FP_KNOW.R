@@ -52,6 +52,7 @@ if("v304_1" %in% colnames(IRdata)) {
   }
 }
 
+  
 
 # Any method 
 IRdata <- IRdata %>%
@@ -200,11 +201,10 @@ IRdata <- IRdata %>%
 # Sum of methods known
 IRdata <- IRdata %>%
   mutate(fp_know_sum =
-           rowsum(IRdata[ ,c(
-             fp_know_fster, fp_know_mster, fp_know_pill, fp_know_iud, 
+          rowSums((IRdata[,fp_know_fster, fp_know_mster, fp_know_pill, fp_know_iud, 
                     fp_know_inj, fp_know_imp, fp_know_mcond, fp_know_fcond, 
                     fp_know_ec, fp_know_sdm, fp_know_lam, fp_know_rhy, 
-                    fp_know_wthd, fp_know_omod, fp_know_other)])) %>%
+                    fp_know_wthd, fp_know_omod, fp_know_other]))) %>%
            set_variable_labels(fp_know_sum = "Sum of known methods")
 			
          		
@@ -216,13 +216,18 @@ var_label(fp_know_mean_all) <- "Mean number of methods known - all"
 
 
 # Mean methods known among married
-if(v502==1) {
-  fp_know_mean_mar <- IRdata %>%
-    weighted.mean(fp_know_sum, wt)
+IRdata %>%
+  filter(., v502==1) %>%
+  fp_know_mean_mar <- weighted.mean(fp_know_sum, wt) %>%
   var_label(fp_know_mean_mar) <- "Mean number of methods known - currently married"
+
+
+# Mean methods known sexually active, unmarried (SAUW)
+if(v502!=1 & v528<=30) {
+  fp_know_mean_sauw <- IRdata %>%
+    weighted.mean(fp_know_sum, wt)
+  var_label(fp_know_mean_sauw) <- "Mean number of methods known - currently married"
 }
-
-
 
 
 ## Knowledge of fertile period

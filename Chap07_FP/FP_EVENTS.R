@@ -1,7 +1,7 @@
 # *****************************************************************************
 # Program: 			FP_EVENTS.do
 # Purpose: 			Create Events Files from Calendar Data
-# Data inputs: 		IR data files
+# Data inputs: 		IR dataset
 # Data outputs:		Reshaped events file for analysis
 # Author:				Courtney Allen based on syntax from https://www.dhsprogram.com/data/calendar-tutorial/
 # Date last modified: May 17 2021 by Courtney Allen for codeshare project 				

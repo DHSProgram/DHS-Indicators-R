@@ -1,7 +1,7 @@
 # ******************************************************************************
 # Program: 			  RC_CHAR_WM.R
 # Purpose: 		    Code to compute respondent characteristics of women  
-# Data inputs: 		IR survey list
+# Data inputs: 		IR dataset
 # Data outputs:		coded variables
 # Author:				  Mahmoud Elkasabi
 # Date last modified: April 01 2021 by Mahmoud Elkasabi

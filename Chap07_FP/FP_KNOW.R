@@ -1,7 +1,7 @@
 # *****************************************************************************
 # Program: 			  FP_KNOW.R
 # Purpose: 			  Code contraceptive knowledge indicators
-# Data inputs: 		IR survey list
+# Data inputs: 		IR dataset
 # Data outputs:		coded variables
 # Author:				  Courtney Allen
 # Date last modified: March 29 2019 by Courtney Allen 

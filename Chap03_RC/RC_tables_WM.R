@@ -1,7 +1,7 @@
 # ******************************************************************************
 # Program: 			  RC_tables_WM.R
 # Purpose: 		    produce tables for indicators
-# Data inputs: 		IR survey list
+# Data inputs: 		IR dataset
 # Data outputs:		tables on screen and in excel sheets
 # Author:				  Mahmoud Elkasabi
 # Date last modified: March 31 2021 by Mahmoud Elkasabi

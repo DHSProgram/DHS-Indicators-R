@@ -2,7 +2,7 @@
 # Program: 			  FP_COMM.R
 # Purpose: 		    Code communication related indicators: exposure to FP messages,
 #                 decision on use/nonuse, discussions.  
-# Data inputs: 		IR survey list
+# Data inputs: 		IR dataset
 # Data outputs:		coded variables
 # Author:				  Courtney Allen
 # Date last modified: March 29 2021 by Courtney Allen

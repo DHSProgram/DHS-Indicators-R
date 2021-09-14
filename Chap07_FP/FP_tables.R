@@ -6,9 +6,6 @@
 # ******************************************************************************
 #   
 
-
-
-
 # survey set the design with survey weights
 IRdata <- IRdata %>%
   mutate(wt = v005/1000000)

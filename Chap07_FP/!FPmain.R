@@ -20,7 +20,7 @@ library(expss)    # for creating tables with Haven labelled data
 library(xlsx)     # for exporting to excel
 
 # set working directory where script is stored
-# setwd(dirname(rstudioapi::getSourceEditorContext()$path))
+ setwd(dirname(rstudioapi::getSourceEditorContext()$path))
 
 # paths where data and script files are stored 
 datapath <- "Data/DHSdata"

@@ -1,7 +1,7 @@
 # ******************************************************************************
 # Program: 			  RC_CHAR_MN.R
 # Purpose: 		    Code to compute respondent characteristics of men  
-# Data inputs: 		MR survey list
+# Data inputs: 		MR dataset
 # Data outputs:		coded variables
 # Author:				  Mahmoud Elkasabi
 # Date last modified: April 01 2021 by Mahmoud Elkasabi

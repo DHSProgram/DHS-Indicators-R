@@ -1,7 +1,7 @@
 # ******************************************************************************
 # Program: 			  FE_MEDIANS.R
 # Purpose: 		    Creates the indicators for fe_amenorrhea, postpartum fe_abstinence, and pp fe_insusceptibility fertility  
-# Data inputs: 		KR survey list
+# Data inputs: 		KR dataset
 # Data outputs:		coded variables, and output on screen and in excel tables
 # Author:				  Mahmoud Elkasabi
 # Date last modified: March 16 2021 by Mahmoud Elkasabi

@@ -1,10 +1,10 @@
 # ******************************************************************************
 # Program: 			  FE_TFR.R
 # Purpose: 		    Code to compute Crude Birth Rate  
-# Data inputs: 		IR & PR survey list
+# Data inputs: 		IR & PR dataset
 # Data outputs:		coded variables, and output on screen and in excel tables
 # Author:				  Mahmoud Elkasabi
-# Date last modified: March 11 2021 by Mahmoud Elkasabi
+# Date last modified: September 10 2021 by Mahmoud Elkasabi
 # ******************************************************************************
 #   
 # -----------------------------------------------------------------------------#
@@ -16,11 +16,11 @@
 # CBR
 # TABLE 5.1
 
-IRdata_FERT <- (IRdata[, c("v021", "v022","v024", "v025", "v005", "v008","v011",
+IRdata_FERT <- (IRdata[, c("v021", "v022","v024", "v025", "v005", "v008","v011", "awfactt", "awfactu", "awfactr", "awfacte", "awfactw",
                            paste("b3_0", 1:9, sep=""), paste("b3_", 10:20, sep=""), "v106", "v190")])
 # National and urban/rural ASFR from IR data
-ASFR <- as.data.frame(fert(IRdata_FERT,Indicator="asfr"))
-ASFRur <- as.data.frame(fert(IRdata_FERT,Indicator="asfr", Class = "v025"))
+ASFR <- as.data.frame(fert(IRdata_FERT,Indicator="asfr",EverMW = "Yes", AWFact = "awfactt"))
+ASFRur <- as.data.frame(fert(IRdata_FERT,Indicator="asfr", Class = "v025",EverMW = "Yes", AWFact = "awfactu"))
 
 # prepare the data
 PRdata <- PRdata %>% 

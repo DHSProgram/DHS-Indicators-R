@@ -1,7 +1,7 @@
 # ******************************************************************************
 # Program: 			  FE_FERT.R
 # Purpose: 		    Code to compute current fertility indicators  
-# Data inputs: 		IR survey list
+# Data inputs: 		IR dataset
 # Data outputs:		coded variables, and output on screen and in excel tables
 # Author:				  Mahmoud Elkasabi
 # Date last modified: March 11 2021 by Mahmoud Elkasabi

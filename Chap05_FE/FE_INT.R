@@ -1,7 +1,7 @@
 # ******************************************************************************
 # Program: 			  FE_INT.R
 # Purpose: 		    Code fertility indicators from birth history reflecting birth intervals  
-# Data inputs: 		BR survey list
+# Data inputs: 		BR dataset
 # Data outputs:		coded variables, and output on screen and in excel tables
 # Author:				  Mahmoud Elkasabi
 # Date last modified: March 12 2021 by Mahmoud Elkasabi

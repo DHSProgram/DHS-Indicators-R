@@ -24,6 +24,7 @@
 # rh_anc_toxinj   "Received 2+ tetanus injections during last pregnancy"
 # rh_anc_neotet   "Protected against neonatal tetanus"
 # ----------------------------------------------------------------------------
+
 IRdata <- IRdata %>%
   mutate(wt = v005/1000000)
 

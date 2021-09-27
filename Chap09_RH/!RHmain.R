@@ -2,7 +2,7 @@
 # Program: 				!RHmain.R
 # Purpose: 				Main file for the Reproductive Health Chapter. 
 #						      The main file will call other do files that will produce the RH indicators and produce tables.
-# Data outputs:		coded variables and table output on screen and in excel tables.
+# Data outputs:		coded variables and table output in excel tables.
 # Author: 				Shireen Assaf 
 # Date last modified:		September 14, 2021 by Shireen Assaf
 # Notes:					

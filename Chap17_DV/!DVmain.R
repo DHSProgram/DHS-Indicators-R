@@ -22,7 +22,7 @@ library(here)       # to get R project path
 #path for R project
 here()
 
-# path for this chapter
+# Path for this chapter. This is also where the data is stored
 chap <- "Chap17_DV"
 
 # select your survey
@@ -41,16 +41,16 @@ IRdata <-  read_dta(here(chap,IRdatafile))
 
 # do separate R scripts for each subtopic
 
-source(here("Chap17_DV/DV_VIOL.R"))
+source(here(paste0(chap,"/DV_VIOL.R")))
 # Purpose: 	Calculate violence indicators, such as age at first violence, ever experienced violence
 
-source(here("Chap17_DV/DV_PRTNR.R"))
+source(here(paste0(chap,"/DV_PRTNR.R")))
 # Purpose: 	Calculate violence indicators that have to do with spousal/partner violence and seeking help
 
-source(here("Chap17_DV/DV_CNTRL.R"))
+source(here(paste0(chap,"/DV_CNTRL.R")))
 # Purpose: 	Calculate violence indicators that have to do with spousal/partner violence and seeking help
  
-#source(here("Chap17_DV/DV_tables.R"))
+source(here("Chap17_DV/DV_tables.R"))
 # Purpose: 	Produce tables for indicators computed from the above do files.
 
 # *******************************************************************************************************************************

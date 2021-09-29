@@ -4,7 +4,7 @@
 #               The main file will call other R files that will produce the FE indicators and produce tables.
 # Data outputs:	coded variables and table output on screen and in excel tables.  
 # Author: 			Mahmoud Elkasabi 
-# Date last modified:	March 11, 2021 by Mahmoud Elkasabi
+# Date last modified:	Sept 29, 2021 by Shireen Assaf
 # *******************************************************************************************************************************/
 
 rm(list = ls(all = TRUE))
@@ -18,10 +18,13 @@ library(sjlabelled)
 library(expss)
 library(matrixStats)
 library(DHS.rates)
+library(here)       # to get R project path
 
-# Set the current file location as the default working directory
-setwd(dirname(rstudioapi::getSourceEditorContext()$path))
-getwd()
+#path for R project
+here()
+
+# Path for this chapter. This is also where the data is stored
+chap <- "Chap05_FE"
 
 ## select your survey ================= define datasets =============================
 
@@ -38,10 +41,10 @@ BRdatafile <- "UGBR7BFL.DTA"
 KRdatafile <- "UGKR7BFL.dta"
 
 # open required datasets
-IRdata <-  read_dta(IRdatafile)
-PRdata <-  read_dta(PRdatafile)
-BRdata <-  read_dta(BRdatafile)
-KRdata <-  read_dta(KRdatafile)
+IRdata <-  read_dta(here(chap,IRdatafile))
+PRdata <-  read_dta(here(chap,PRdatafile))
+BRdata <-  read_dta(here(chap,BRdatafile))
+KRdata <-  read_dta(here(chap,KRdatafile))
 
 
 ################################################################################################
@@ -49,19 +52,17 @@ KRdata <-  read_dta(KRdatafile)
 ## do separate R scripts for each subtopic
 
 # Fertility rates
-source("FE_TFR.R", echo=TRUE)
+source(here(paste0(chap,"/FE_TFR.R")))
 
 # Current Fertility indicators
-source("FE_FERT.R", echo=TRUE)
-
+source(here(paste0(chap,"/FE_FERT.R")))
 
 # Crude Birth Rates
-source("FE_CBR.R", echo=TRUE)
-
+source(here(paste0(chap,"/FE_CBR.R")))
 
 # Birth intervals indicators
-source("FE_INT.R", echo=TRUE)
+source(here(paste0(chap,"/FE_INT.R")))
 
 # Postpartum amenorrhoea, abstinence, and insusceptibility
 DHS_PHASE <- 7
-source("FE_MEDIANS.R", echo=TRUE)
+source(here(paste0(chap,"/FE_MEDIANS.R")))

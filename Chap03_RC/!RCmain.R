@@ -4,7 +4,7 @@
 #               The main file will call other R files that will produce the RC indicators and produce tables.
 # Data outputs:	coded variables and table output on screen and in excel tables.  
 # Author: 			Mahmoud Elkasabi 
-# Date last modified:	March 30, 2021 by Mahmoud Elkasabi
+# Date last modified:	Sept 29, 2021 by Shireen Assaf
 # *******************************************************************************************************************************/
 rm(list = ls(all = TRUE))
 
@@ -16,13 +16,13 @@ library(sjlabelled)
 library(matrixStats) # for weightedMedian function
 library(expss)
 library(xlsx)
+library(here)       # to get R project path
 
-# Set the current file location as the default working directory
-setwd(dirname(rstudioapi::getSourceEditorContext()$path))
-getwd()
+#path for R project
+here()
 
-# path where data files are stored 
-datapath <- "./Data/DHSdata"
+# Path for this chapter. This is also where the data is stored
+chap <- "Chap03_RC"
 
 #####################################################################################
 ## Define datasets
@@ -37,17 +37,21 @@ MRdatafile <- "UGMR7BFL.dta"
 ## Do separate R scripts for each subtopic
 
 # Respondent characteristic indicators for women
-IRdata <-  read_dta(file.path(datapath,IRdatafile))
+IRdata <-  read_dta(here(chap,IRdatafile))
 
 # create analytic variables
-source("RC_CHAR_WM.R", echo=TRUE)
+source(here(paste0(chap,"/RC_CHAR_WM.R")))
 # run the chapter tables
-source("RC_tables_WM.R", echo=TRUE)
+source(here(paste0(chap,"/RC_tables_WM.R")))
+
+#####################################################################################
 
 # Respondent characteristic indicators for men
-MRdata <-  read_dta(file.path(datapath,MRdatafile))
+MRdata <-  read_dta(here(chap,MRdatafile))
 
 # create analytic variables
-source("RC_CHAR_MN.R", echo=TRUE)
+source(here(paste0(chap,"/RC_CHAR_MN.R")))
 # run the chapter tables
-source("RC_tables_MN.R", echo=TRUE)
+source(here(paste0(chap,"/RC_tables_MN.R")))
+
+#####################################################################################

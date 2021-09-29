@@ -4,7 +4,7 @@
 #               The main file will call other R files that will produce the FF indicators and produce tables.
 # Data outputs:	coded variables and table output on screen and in excel tables.  
 # Author: 			Mahmoud Elkasabi 
-# Date last modified:	September 07, 2021 by Mahmoud Elkasabi
+# Date last modified:	Sept 29, 2021 by Shireen Assaf
 # *******************************************************************************************************************************/
 rm(list = ls(all = TRUE))
 
@@ -15,13 +15,13 @@ library(dplyr)
 library(sjlabelled)
 library(expss)
 library(xlsx)
+library(here)       # to get R project path
 
-# Set the current file location as the default working directory
-setwd(dirname(rstudioapi::getSourceEditorContext()$path))
-getwd()
+#path for R project
+here()
 
-# path where data files are stored 
-datapath <- "./Data/DHSdata"
+# Path for this chapter. This is also where the data is stored
+chap <- "Chap06_FF"
 
 #####################################################################################
 ## Define datasets
@@ -36,22 +36,25 @@ MRdatafile <- "UGMR7BFL.dta"
 ## Do separate R scripts for each subtopic
 
 # Fertility Preferences for women
-IRdata <-  read_dta(file.path(datapath,IRdatafile))
+IRdata <-  read_dta(here(chap,IRdatafile))
 
 # create analytic variables
-source("FF_PREF_WM.R", echo=TRUE)
-# run the chapter tables
-source("FF_tables_WM.R", echo=TRUE)
-# run the Fertility planning status table
-source("FF_PLAN.R", echo=TRUE)
-# run the wanted fertility rates table
-source("FF_WANT_TFR.R", echo=TRUE)
+source(here(paste0(chap,"/FF_PREF_WM.R")))
 
+# run the chapter tables
+source(here(paste0(chap,"/FF_tables_WM.R")))
+
+# run the Fertility planning status table
+source(here(paste0(chap,"/FF_PLAN.R")))
+
+# run the wanted fertility rates table
+source(here(paste0(chap,"/FF_WANT_TFR.R")))
 
 # Fertility Preferences for men
-MRdata <-  read_dta(file.path(datapath,MRdatafile))
+MRdata <-  read_dta(here(chap,MRdatafile))
 
 # create analytic variables
-source("FF_PREF_MN.R", echo=TRUE)
+source(here(paste0(chap,"/FF_PREF_MN.R")))
+
 # run the chapter tables
-source("FF_tables_MN.R", echo=TRUE)
+source(here(paste0(chap,"/FF_tables_MN.R")))

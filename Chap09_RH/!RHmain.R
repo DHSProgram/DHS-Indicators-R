@@ -4,7 +4,7 @@
 #						      The main file will call other do files that will produce the RH indicators and produce tables.
 # Data outputs:		coded variables and table output in excel tables.
 # Author: 				Shireen Assaf 
-# Date last modified:		September 14, 2021 by Shireen Assaf
+# Date last modified:		September 29, 2021 by Shireen Assaf
 # Notes:					
 # *******************************************************************************************************************************
 
@@ -18,12 +18,12 @@ library(labelled)   # used for Haven labeled variable creation
 library(expss)    # for creating tables with Haven labeled data
 library(xlsx)     # for exporting to excel
 library(naniar)   # to use replace_with_na function
-library(here)
+library(here)       # to get R project path
 
 #path for R project
 here()
  
-# path for this chapter
+# path for this chapter. This is also where the data is stored
 chap <- "Chap09_RH"
 
 # select your survey
@@ -42,27 +42,28 @@ BRdatafile <- "GMBR81FL.dta"
 IRdata <-  read_dta(here(chap,IRdatafile))
 
 # do separate R scripts for each subtopic
-
-source(here("Chap09_RH/RH_ANC.R"))
+source(here(paste0(chap,"/RH_ANC.R")))
 # Purpose: 	Code ANC indicators
 
-source(here("Chap09_RH/RH_PNC.R"))
+source(here(paste0(chap,"/RH_PNC.R")))
 # Purpose: 	Code PNC indicators for mother and newborn
 
-source(here("Chap09_RH/RH_Probs.R"))
+source(here(paste0(chap,"/RH_Probs.R")))
 # Purpose: 	Code indicators for problems accessing health care 
 
-#*******************************************************************************************************************************
+# ****************************
 
 # BR file variables
  
 # open dataset
 BRdata <-  read_dta(here(chap,BRdatafile))
 
-source(here("Chap09_RH/RH_DEL.R"))
+source(here(paste0(chap,"/RH_DEL.R")))
 # Purpose: Code delivery indicators
- 
-# ******************************************************************************************************************************
-#source(here("Chap09_RH/RH_tables.R"))
+
+# ****************************
+
+source(here(paste0(chap,"/RH_tables.R")))
 # Purpose: 	Produce tables for indicators computed from above do files (both from IR and BR data)
+
 # ******************************************************************************************************************************

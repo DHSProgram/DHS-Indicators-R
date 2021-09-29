@@ -78,8 +78,6 @@
 # 	dv_help_other       "Source of help: other"
 #  ______________________________________________________________________________
 
-IRdata <- IRdata %>%
-  mutate(dwt = d005/1000000)
 
 # EXPERIENCED PHYSICAL VIOLENCE
 
@@ -104,7 +102,7 @@ IRdata <- IRdata %>%
              d117a==1 | d117a==2 | d130a==1 ~ 1,
              v044==1  ~ 0 )) %>% 
   set_value_labels(dv_phy_12m = c("Yes" = 1, "No"=0)) %>%
-  set_variable_labels(dv_phy_12m = "Experienced physical violence since age 15")
+  set_variable_labels(dv_phy_12m = "Experienced physical violence in the past 12 mos")
 
 # //In the last 12 months by frequency (often or sometimes)
 IRdata <- IRdata %>%
@@ -238,12 +236,12 @@ IRdata <- IRdata %>%
 
 # //Teacher
 IRdata <- IRdata %>%
-  mutate(dv_phy_other_inlaw =
+  mutate(dv_phy_teacher =
            case_when(
-             d115q==1 | d118q==1 ~ 1, 
+             d115v==1 | d118v==1 ~ 1, 
              dv_phy==1 ~ 0 )) %>% 
-  set_value_labels(dv_phy_other_inlaw = c("Yes" = 1, "No"=0)) %>%
-  set_variable_labels(dv_phy_other_inlaw = "Person committing physical violence: teacher")
+  set_value_labels(dv_phy_teacher = c("Yes" = 1, "No"=0)) %>%
+  set_variable_labels(dv_phy_teacher = "Person committing physical violence: teacher")
 
 # //Employer/someone at work
 IRdata <- IRdata %>%

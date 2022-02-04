@@ -19,12 +19,6 @@ IRdata <- IRdata %>%
 # set expss package options to show one decimal place
 expss_digits(digits=1)
 
-# ****************************************************
-# * indicators from IR file
-# if file=="IR" {
-# * limiting to women age 15-49
-# drop if v012<15 | v012>49
-
 # *********************************************************************************
 # * ANC Indicators: excel file Tables_ANC will be produced
 # *********************************************************************************

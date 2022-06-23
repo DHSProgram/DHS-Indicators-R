@@ -4,7 +4,7 @@
 # Data inputs: 		IR survey list
 # Data outputs:		coded variables
 # Author:		Mahmoud Elkasabi
-# Date last modified: September 20 2021 by Mahmoud Elkasabi
+# Date last modified: December 06 2021 by Mahmoud Elkasabi
 # ******************************************************************************
 # -----------------------------------------------------------------------------#
 # # Variables created in this file:
@@ -151,7 +151,7 @@ PMRdata <- PMRdata[order(PMRdata$v001, PMRdata$v002, PMRdata$v003, PMRdata$cmc),
 # merge in birth history variables
 # Open birth history
 
-BRdatafile <- "UGBR7BFL.DTA"
+BRdatafile <- BRdata
 births <-  read_dta(file.path(datapath,BRdatafile))
 
 births <- (births[, c("v001", "v002", "v003", "bidx", "b3", "b6")])

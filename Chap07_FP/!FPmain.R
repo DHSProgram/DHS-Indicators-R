@@ -37,6 +37,7 @@ IRdatafile <- "UGIR7BFL.dta"
 # MR Files
 MRdatafile <- "UGMR7BFL.dta"
 # example of file names: MMR71FL TJMR70FL GHMR72FL UGMR7BFL
+# *******************************************************************************************************************************
 
 ## IR file variables
 
@@ -44,8 +45,6 @@ MRdatafile <- "UGMR7BFL.dta"
 IRdata <-  read_dta(here(chap,IRdatafile))
 # create indicator of file type (e.g. "IR", "MR", etc)
 file <- "IR" 
-
-# *******************************************************************************************************************************
 
 ## do separate R scripts for each subtopic
 

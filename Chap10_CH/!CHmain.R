@@ -1,5 +1,5 @@
 # /*******************************************************************************************************************************
-# Program: 				  !CHmain.do
+# Program: 				  !CHmain.R
 # Purpose: 				  Main file for the Child Health Chapter. 
 # 						      The main file will call other syntax files that will produce the CH indicators and produce tables.
 # Data outputs:			Coded variables and table output in excel tables.  

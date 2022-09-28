@@ -51,7 +51,7 @@ These scripts typically use `expss` package to create tables that can utilize su
 ## Chapter codes
 
 |Ch. | Title | Ch. Acronym |
-|---|---|---|---|---|---|
+|---|---|---|
 |   2|Population & Housing|PH|
 |   3|Respondents? Characteristics|RC|
 |   4|Marriage & Sexual Activity|MS|

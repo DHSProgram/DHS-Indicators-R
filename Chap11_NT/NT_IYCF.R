@@ -230,7 +230,7 @@ KRiycf <- KRiycf %>%
 
 # //Min meal frequency
 KRiycf <- KRiycf %>%
-  mutate(feedings = case_when(m39>0 & m39<8 ~ milkf3 + m39 )) %>%
+  mutate(feedings = case_when(m39>0 & m39<8 ~ totmilkf + m39 )) %>%
   mutate(nt_mmf  = 
            if_else(inrange(age,6,23) & (m4==95 & inrange(m39,2,7) & inrange(age,6,8)) | (m4==95 & inrange(m39,3,7) & inrange(age,9,23)) |
                   (m4!=95 & feedings>=4 & inrange(age,6,23)), 1, 0 )) 
@@ -243,7 +243,7 @@ KRiycf <- KRiycf %>%
 KRiycf <- KRiycf %>%
   mutate(foodsum2 = nt_grains+nt_root+nt_nuts+nt_meatfish+nt_vita+nt_frtveg+nt_eggs) %>%
   mutate(nt_mad  = 
-           if_else((m4==95 & nt_mdd==1 & nt_mmf==1) | (m4!=95 & foodsum2>=4 & nt_mmf==1 & milkf3>=2), 1, 0 )) 
+           if_else((m4==95 & nt_mdd==1 & nt_mmf==1) | (m4!=95 & foodsum2>=4 & nt_mmf==1 & totmilkf>=2), 1, 0 )) 
 KRiycf[["nt_mad"]] <- ifelse(KRiycf[["age"]]<6, NA, KRiycf[["nt_mad"]])
 KRiycf <- KRiycf %>%
   set_value_labels(nt_mad = c("Yes" = 1, "No"=0  )) %>%

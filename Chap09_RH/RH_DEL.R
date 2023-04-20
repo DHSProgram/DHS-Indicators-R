@@ -135,7 +135,7 @@ BRdata <- BRdata %>%
              m61>=112 & m61<124 | m61==200 ~ 3 ,
              (m61>=124 & m61<172) | m61==201 | m61==202 ~ 4 ,
              (m61>=172 & m61<198) | (m61>=203 & m61<298) | (m61>=301 & m61<398) ~ 5 ,
-             m61==198 | m61==199 | m61==298 | m61==299 | m61==398 | m61=399 |m61==998 | m61==999 ~ 9 ,
+             m61==198 | m61==199 | m61==298 | m61==299 | m61==398 | m61==399 |m61==998 | m61==999 ~ 9 ,
              rh_del_place!=1 | bidx!=1 | age>=period ~ 99)) %>%
   replace_with_na(replace = list(rh_del_stay = c(99))) %>%
   set_value_labels(rh_del_stay = c("<6 hours" = 1, "6-11 hours"=2, "12-23 hours"=3, "1-2 days"=4, "3+ days"=5, "Don't know/missing"=9  )) %>%

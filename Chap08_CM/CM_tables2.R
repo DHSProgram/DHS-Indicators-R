@@ -16,7 +16,7 @@ table_temp = IRdata_RISK %>%
   tab_weight(wt) %>% 
   tab_stat_cpct() %>% 
   tab_pivot() %>% 
-  tab_caption("High risk fertility indicators amoung women ")
+  tab_caption("High risk fertility indicators among women ")
 
 table_temp
 

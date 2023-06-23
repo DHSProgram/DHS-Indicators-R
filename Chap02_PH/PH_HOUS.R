@@ -17,7 +17,7 @@
 # ph_floor		    "Flooring material"
 # ph_rooms_sleep	"Rooms for sleeping"
 # ph_cook_place	  "Place for cooking"
-# ph_cook_fuel	  "Type fo cooking fuel"
+# ph_cook_fuel	  "Type of cooking fuel"
 # ph_cook_solid	  "Using solid fuel for cooking"
 # ph_cook_clean	  "Using clean fuel for cooking"
 # 	

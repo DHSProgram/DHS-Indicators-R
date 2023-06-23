@@ -21,7 +21,7 @@ table_temp2 <- CM_PMRdata %>% group_by(mo_age_at_birth) %>% count(stillbirths, w
   mutate (Background  = "mo_age_at_birth") %>%
   rename (Level = mo_age_at_birth)
 
-# prenancy interval
+# pregnancy interval
 table_temp3 <- CM_PMRdata %>% group_by(preg_interval) %>% count(stillbirths, wt = wt) %>% filter(stillbirths==1) %>%
   mutate (Background  = "preg_interval") %>%
   rename (Level = preg_interval)
@@ -65,7 +65,7 @@ table_temp2 <- CM_PMRdata %>% group_by(mo_age_at_birth) %>% count(earlyneonatal,
   mutate (Background  = "mo_age_at_birth") %>%
   rename (Level = mo_age_at_birth)
 
-# prenancy interval
+# pregnancy interval
 table_temp3 <- CM_PMRdata %>% group_by(preg_interval) %>% count(earlyneonatal, wt = wt) %>% filter(earlyneonatal==1) %>%
   mutate (Background  = "preg_interval") %>%
   rename (Level = preg_interval)
@@ -109,7 +109,7 @@ table_temp2 <- CM_PMRdata %>% group_by(mo_age_at_birth) %>% summarise(cm_peri = 
   mutate (Background  = "mo_age_at_birth") %>%
   rename (Level = mo_age_at_birth)
 
-# prenancy interval
+# pregnancy interval
 table_temp3 <- CM_PMRdata %>% group_by(preg_interval) %>% summarise(cm_peri = weighted.mean(cm_peri,wt)) %>%
   mutate (Background  = "preg_interval") %>%
   rename (Level = preg_interval)

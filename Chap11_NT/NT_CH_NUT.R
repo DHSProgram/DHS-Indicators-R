@@ -4,7 +4,7 @@
 # Data inputs: 	PR dataset
 # Data outputs:	coded variables
 # Author:				Shireen Assaf
-# Date last modified: November 24, 2021 by Shireen Assaf 
+# Date last modified: July 31, 2023 by Shireen Assaf 
 # *****************************************************************************************************/
 # 
 # /*----------------------------------------------------------------------------
@@ -37,7 +37,7 @@ PRdata <- PRdata %>%
   mutate(nt_ch_sev_stunt =
            case_when(
              hv103==1 &  hc70< -300  ~ 1 ,
-             hv103==1 &  hc70>= -300 ~ 0 ,
+             hv103==1 &  hc70>= -300 & hc70<9996 ~ 0 ,
              hc70>=9996 ~ 99)) %>%
   replace_with_na(replace = list(nt_ch_sev_stunt = c(99))) %>%
   set_value_labels(nt_ch_sev_stunt = c("Yes" = 1, "No"=0  )) %>%
@@ -48,7 +48,7 @@ PRdata <- PRdata %>%
   mutate(nt_ch_stunt =
            case_when(
              hv103==1 &  hc70< -200  ~ 1 ,
-             hv103==1 &  hc70>= -200 ~ 0 ,
+             hv103==1 &  hc70>= -200 & hc70<9996 ~ 0 ,
              hc70>=9996 ~ 99)) %>%
   replace_with_na(replace = list(nt_ch_stunt = c(99))) %>%
   set_value_labels(nt_ch_stunt = c("Yes" = 1, "No"=0  )) %>%
@@ -64,7 +64,7 @@ PRdata <- PRdata %>%
   mutate(nt_ch_sev_wast =
            case_when(
              hv103==1 &  hc72< -300  ~ 1 ,
-             hv103==1 &  hc72>= -300 ~ 0 ,
+             hv103==1 &  hc72>= -300 & hc72<9996 ~ 0 ,
              hc72>=9996 ~ 99)) %>%
   replace_with_na(replace = list(nt_ch_sev_wast = c(99))) %>%
   set_value_labels(nt_ch_sev_wast = c("Yes" = 1, "No"=0  )) %>%
@@ -75,7 +75,7 @@ PRdata <- PRdata %>%
   mutate(nt_ch_wast =
            case_when(
              hv103==1 &  hc72< -200  ~ 1 ,
-             hv103==1 &  hc72>= -200 ~ 0 ,
+             hv103==1 &  hc72>= -200 & hc72<9996~ 0 ,
              hc72>=9996 ~ 99)) %>%
   replace_with_na(replace = list(nt_ch_wast = c(99))) %>%
   set_value_labels(nt_ch_wast = c("Yes" = 1, "No"=0  )) %>%
@@ -86,7 +86,7 @@ PRdata <- PRdata %>%
   mutate(nt_ch_ovwt_ht =
            case_when(
              hv103==1 &  hc72> 200 & hc72<9996 ~ 1 ,
-             hv103==1 &  hc72<= 200 ~ 0 ,
+             hv103==1 &  hc72<= 200 & hc72<9996 ~ 0 ,
              hc72>=9996 ~ 99)) %>%
   replace_with_na(replace = list(nt_ch_ovwt_ht = c(99))) %>%
   set_value_labels(nt_ch_ovwt_ht = c("Yes" = 1, "No"=0  )) %>%
@@ -102,7 +102,7 @@ PRdata <- PRdata %>%
   mutate(nt_ch_sev_underwt =
            case_when(
              hv103==1 &  hc71< -300  ~ 1 ,
-             hv103==1 &  hc71>= -300 ~ 0 ,
+             hv103==1 &  hc71>= -300 & hc71<9996 ~ 0 ,
              hc71>=9996 ~ 99)) %>%
   replace_with_na(replace = list(nt_ch_sev_underwt = c(99))) %>%
   set_value_labels(nt_ch_sev_underwt = c("Yes" = 1, "No"=0  )) %>%
@@ -113,7 +113,7 @@ PRdata <- PRdata %>%
   mutate(nt_ch_underwt =
            case_when(
              hv103==1 &  hc71< -200  ~ 1 ,
-             hv103==1 &  hc71>= -200 ~ 0 ,
+             hv103==1 &  hc71>= -200  & hc71<9996 ~ 0 ,
              hc71>=9996 ~ 99)) %>%
   replace_with_na(replace = list(nt_ch_underwt = c(99))) %>%
   set_value_labels(nt_ch_underwt = c("Yes" = 1, "No"=0  )) %>%
@@ -124,7 +124,7 @@ PRdata <- PRdata %>%
   mutate(nt_ch_ovwt_age =
            case_when(
              hv103==1 &  hc71> 200 & hc71<9996 ~ 1 ,
-             hv103==1 &  hc71<= 200 ~ 0 ,
+             hv103==1 &  hc71<= 200  & hc71<9996 ~ 0 ,
              hc71>=9996 ~ 99)) %>%
   replace_with_na(replace = list(nt_ch_ovwt_age = c(99))) %>%
   set_value_labels(nt_ch_ovwt_age = c("Yes" = 1, "No"=0  )) %>%

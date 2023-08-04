@@ -4,7 +4,7 @@
 # Data inputs: 		BR and PR dataset
 # Data outputs:		coded variables
 # Author:				Trevor Croft, translated to R by Mahmoud Elkasabi 
-# Date last modified: July 25, 2023 by Shireen Assaf 
+# Date last modified: August 4, 2023 by Courtney Allen
 # *****************************************************************************************************/
 # 
 # /*----------------------------------------------------------------------------
@@ -173,7 +173,3 @@ ph_sch_nar_sec <- nar_gar(Rate="NAR",Sch="sec",Sch_age="sec_age")
 ph_sch_gar_prim <- nar_gar(Rate="GAR",Sch="prim",Sch_age="prim_age")
 ph_sch_gar_sec <- nar_gar(Rate="GAR",Sch="sec",Sch_age="sec_age")
 
-write.xlsx(ph_sch_nar_prim, "Tables_PH.xlsx", sheetName = "schol_nar_prim",append=TRUE)
-write.xlsx(ph_sch_nar_sec, "Tables_PH.xlsx", sheetName = "schol_nar_sec",append=TRUE)
-write.xlsx(ph_sch_gar_prim, "Tables_PH.xlsx", sheetName = "schol_gar_prim",append=TRUE)
-write.xlsx(ph_sch_gar_sec, "Tables_PH.xlsx", sheetName = "schol_gar_sec",append=TRUE)

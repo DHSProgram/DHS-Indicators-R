@@ -30,13 +30,13 @@ chap <- "Chap02_PH"
 # select your survey
 
 # HR Files
-HRdatafile <- "ZWHR72FL.dta"
+HRdatafile <- "RWHR81FL.dta"
 
 # PR Files
-PRdatafile <- "ZWPR72FL.dta"
+PRdatafile <- "RWPR81FL.dta"
 
 # BR Files
-BRdatafile <- "ZWBR72FL.dta"
+BRdatafile <- "RWBR81FL.dta"
 
 # ****************************
 
@@ -76,8 +76,7 @@ PRWASHdata <- WASHdata # tables.R will refer to this dataset for tables on house
 source(here(paste0(chap,"/PH_HNDWSH.R")))
 # Purpose:	Code hand-washing indicators
 
-source(here(paste0(chap,"/PH_tables.R")))
-# Purpose: 	Produce tables for indicators computed from the above do files (from HR and the hand-washing indicators)
+
 
 # For the PH_SCHOL.R below you need to update the following inputs since they are country-specific
 # To produce the net attendance ratios you need to provide country specific information on the year 
@@ -112,5 +111,5 @@ source(here(paste0(chap,"/PH_GINI.R")))
 
 
 
-# ******************************************************
-WASHdata <- PRdata #same code can be used for PR or HR files, but must be specified here
+source(here(paste0(chap,"/PH_tables.R")))
+# Purpose: 	Produce tables for indicators computed from the above do files 

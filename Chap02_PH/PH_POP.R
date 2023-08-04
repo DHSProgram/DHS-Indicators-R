@@ -363,18 +363,7 @@ temp_children <- temp_children %>%
 temp_children <- temp_children %>%
   mutate(wt = hv005/1000000)
 
-# Coverage of HIV testing
-# Testing status among women
-table_temp <-  temp_children %>% 
-  calc_cro_cpct(
-    cell_vars = list(ph_hhhead_sex, ph_num_members, ph_orph_double,ph_orph_single,ph_foster,ph_orph_foster),
-    col_vars = list(hv025, total() ),
-    weight = wt,
-    total_label = "N",
-    total_statistic = "w_cases",
-    expss_digits(digits=1)) %>%   
-  set_caption("Testing status among women")
+PR_temp_children <- PR_temp_children %>%
+  mutate(wt = hv005/1000000)
 
-table_temp
 
-write.xlsx(table_temp, "Tables_PH.xlsx", sheetName = "ph_pop",append=TRUE)

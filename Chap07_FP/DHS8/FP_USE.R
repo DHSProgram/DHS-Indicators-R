@@ -4,7 +4,7 @@
 # Data inputs: 		IR dataset
 # Data outputs:		coded variables
 # Author:				  Courtney Allen
-# Date last modified: March 29  2021 by Courtney Allen
+# Date last modified: June 2024 Ali Roghani
 # ******************************************************************************
 
 # NOTE: this script is created to run from the FPmain.R file where the following libraries are loaded
@@ -48,7 +48,12 @@
 # fp_cruse_rhy		"Currently use rhythm"
 # fp_cruse_wthd		"Currently use withdrawal"
 # fp_cruse_other	"Currently use other"
-# 
+#fp_not_cruse		"Not currently using any method" - NEW Indicator in DHS8
+
+#fp_inj_dmpa			"Current injectable users using DMPA-SC/Sayana Press" - NEW Indicator in DHS8
+#fp_inj_dmpa_pr		"Among users of DMPA-SC/Sayana Press, person administering the injection the last time" - NEW Indicator in DHS8
+#fp_cruse_ec_12mo	"Currently use emergency contraception in the last 12 months" - NEW Indicator in DHS8
+ 
 # fp_ster_age			"Age at time of sterilization for women"
 # fp_ster_median	"Median age at time of sterilization for women"
 # 
@@ -67,6 +72,7 @@
 # fp_info_what_to_do	"Informed of what to do if experienced side effects among female sterilization, pill, IUD, injectables, and implant users"
 # fp_info_other_meth	"Informed of other methods by health or FP worker among female sterilization, pill, IUD, injectables, and implant users"
 # fp_info_all 		    "Informed of all three (method information index) among female sterilization, pill, IUD, injectables, and implant users"
+#fp_info_switch		"Informed that they could switch if needed among female sterilization, pill, IUD, injectables, and implant users" - NEW Indicator in DHS8
 
 #------------------------------------------------------------------------------
 
@@ -363,6 +369,39 @@ IRdata <- IRdata %>%
   set_variable_labels(fp_cruse_trad = "Currently used any traditional method")
 
 
+# Not currently using any method - NEW Indicator in DHS8
+IRdata <- IRdata %>%
+  mutate(fp_not_cruse = ifelse(v313 == 0, 1, 0)) %>%
+  set_value_labels(fp_not_cruse = c(yes = 1, no = 0)) %>%
+  set_variable_labels(fp_not_cruse = "Not currently using any method")
+
+
+
+
+# Current injectable users using DMPA-SC/Sayana Press - NEW Indicator in DHS8
+IRdata <- IRdata %>%
+  mutate(fp_inj_dmpa = ifelse(v3a11 == 1, 1, ifelse(is.na(v3a11), NA, 0))) %>%
+  set_value_labels(fp_inj_dmpa = c(yes = 1, no = 0)) %>%
+  set_variable_labels(fp_inj_dmpa = "Current injectable users using DMPA-SC/Sayana Press")
+
+
+# Person administering MPA-SC/Sayana Press injection - NEW Indicator in DHS8
+IRdata <- IRdata %>%
+  mutate(fp_inj_dmpa_pr = if_else(is.na(v3a12), NA, v3a12)) %>%
+  set_variable_labels(fp_inj_dmpa_pr = "Among users of DMPA-SC/Sayana Press, person administering the injection the last time")
+
+
+# Used emergency contraceptionin the last 12 months - NEW Indicator in DHS8
+IRdata <- IRdata %>%
+  mutate(fp_cruse_ec_12mo = case_when(
+    v312 == 16 | v3a13 == 1 ~ 1,
+    TRUE ~ 0
+  )) %>%
+  set_variable_labels(fp_cruse_ec_12mo = "Used emergency contraception in the last 12 months")
+
+
+
+
 
 #------------------------------------------------------------------------------#
 
@@ -550,6 +589,16 @@ IRdata <- IRdata %>%
              ((v3a02==1 | v3a03==1) & v3a04==1 & (v3a05==1 | v3a06==1) & (v312 %in% c(1,2,3,6,11)) & (v008-v317<60)) ~ 1)) %>% 
   set_value_labels(fp_info_all = c(yes = 1, no = 0)) %>%
   set_variable_labels(fp_info_all = "Informed of all three (method information index) among female sterilization, pill, IUD, injectables, and implant users")
+
+
+#Informed that they could switch if needed - NEW Indicator in DHS8
+IRdata <- IRdata %>%
+  mutate(fp_info_switch = case_when(
+    v3a14 == 1 & v312 %in% c(1, 2, 3, 11) & (v008 - v317 < 60) ~ 1,
+    v312 %in% c(1, 2, 3, 11) & (v008 - v317 < 60) ~ 0,
+    TRUE ~ NA
+  )) %>%
+  set_variable_labels(fp_info_switch = "Informed that they could switch if needed among female sterilization, pill, IUD, injectables, and implant users")
 
 
 

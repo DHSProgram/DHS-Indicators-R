@@ -4,7 +4,7 @@
 # Data inputs: 		IR dataset
 # Data outputs:		coded variables
 # Author:				  Courtney Allen
-# Date last modified: March 29 2019 by Courtney Allen 
+# Date last modified: June 2024 Ali Roghani
 # ****************************************************************************
 
    
@@ -234,7 +234,7 @@ if(v502!=1 & v528<=30) {
 IRdata <- IRdata %>%
   mutate(fp_know_fert_all = 
            recode(v217, 
-                  4=1, 1=2, 2=3, 3=4, 6=5, 5=6,)) %>%
+                  4=1, 1=2, 2=3, 3=4, 6=5, 5=6)) %>%
   set_value_labels(fp_know_fert_all = c(
    "Just before her menstrual period begins",
    "During her menstrual period",

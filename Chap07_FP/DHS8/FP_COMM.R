@@ -15,8 +15,16 @@
 # fp_message_tv			  "Exposure to family planning message by TV"
 # fp_message_paper		"Exposure to family planning message by newspaper/magazine"
 # fp_message_mobile		"Exposure to family planning message by mobile phone"
-# fp_message_noneof4	"Not exposed to any of the four media sources"
-# fp_message_noneof3 	"Not exposed to TV, radio, or paper media sources"
+#fp_message_socialm		"Exposure to family planning message by social media" - NEW Indicator in DHS8
+#fp_message_poster		"Exposure to family planning message by poster/leaflet/brochure" - NEW Indicator in DHS8
+#fp_message_signs		"Exposure to family planning message by outdoor sign/billboard" - NEW Indicator in DHS8
+#fp_message_comnty		"Exposure to family planning message by community meetings or events" - NEW Indicator in DHS8
+#fp_message_noneof8		"Not exposed to any of the eight media sources" - NEW Indicator in DHS8
+
+#fp_dec_who				"Who makes the decision to use or not use family planning" - NEW Indicator in DHS8
+#fp_dec_wm				"Woman participated in decisionmaking about family planning" - NEW Indicator in DHS8
+
+#fp_preg_pressure		"Pressured by husbands/partners or other family to get pregnant when they did not want to" - NEW Indicator in DHS8
 # 
 # fp_decyes_user			"Who makes the decision to use family planning among users"
 # fp_decno_nonuser		"Who makes decision not to use family planning among non-users"
@@ -177,18 +185,74 @@ IRdata <- IRdata %>%
   set_value_labels(fp_message_mobile = c(yes = 1, no = 0)) %>%
   set_variable_labels(fp_message_mobile = "Exposure to family planning message by mobile phone")
 
-
-# Did not hear a family planning message from any of the 4 media sources
+# Family planning messages by social media - NEW Indicator in DHS8
 IRdata <- IRdata %>%
-  mutate(fp_message_noneof4 =
-           ifelse(mv384a!=1 & mv384b!=1 & mv384c!=1 & mv384d!=1, 1, 0))%>%
-  set_value_labels(fp_message_noneof4 = c(yes = 1, no = 0)) %>%
-  set_variable_labels(fp_message_noneof4 = "Exposure to family planning message any of four sources (TV, radio, paper, mobile)")
+  mutate(fp_message_socialm = if_else(v384e == 1, 1, 0)) %>%
+  set_value_labels(fp_message_socialm = c(yes = 1, no = 0)) %>%
+  set_variable_labels(fp_message_socialm = "Exposure to family planning message by social media")
 
 
-# Did not hear a family planning message from radio, TV or paper
+# Family planning messages by poster/leaflet/brochure - NEW Indicator in DHS8
 IRdata <- IRdata %>%
-  mutate(fp_message_noneof3 =
-           ifelse(mv384a!=1 & mv384b!=1 & mv384c!=1, 1, 0)) %>%
-  set_value_labels(fp_message_noneof3 = c(yes = 1, no = 0)) %>%
-  set_variable_labels(fp_message_noneof3 = "Not exposed to TV, radio, or paper media sources")
+  mutate(fp_message_poster = if_else(v384f == 1, 1, 0)) %>%
+  set_value_labels(fp_message_poster = c(yes = 1, no = 0)) %>%
+  set_variable_labels(fp_message_poster = "Exposure to family planning message by poster/leaflet/brochure")
+
+# Family planning messages by outdoor sign/billboard - NEW Indicator in DHS8
+IRdata <- IRdata %>%
+  mutate(fp_message_signs = if_else(v384g == 1, 1, 0)) %>%
+  set_value_labels(fp_message_signs = c(yes = 1, no = 0)) %>%
+  set_variable_labels(fp_message_signs = "Exposure to family planning message by outdoor sign/billboard")
+
+# Family planning messages by community meetings or events - NEW Indicator in DHS8
+IRdata <- IRdata %>%
+  mutate(fp_message_comnty = if_else(v384h == 1, 1, 0)) %>%
+  set_value_labels(fp_message_comnty = c(yes = 1, no = 0)) %>%
+  set_variable_labels(fp_message_comnty = "Exposure to family planning message by community meetings or events")
+
+# Did not hear a family planning message from any of the eight media sources
+IRdata <- IRdata %>%
+  mutate(fp_message_noneof8 = if_else(
+    v384a != 1 & v384b != 1 & v384c != 1 & v384d != 1 & v384e != 1 & v384f != 1 & v384g != 1 & v384h != 1, 
+    1, 
+    0
+  )) %>%
+  set_value_labels(fp_message_noneof8 = c(yes = 1, no = 0)) %>%
+  set_variable_labels(fp_message_noneof8 = "Not exposed to any of the eight media sources")
+
+
+
+#  Family Planning decision making and discussion  
+
+
+# Who makes decision to use family planning - NEW Indicator in DHS8
+IRdata <- IRdata %>%
+  mutate(fp_dec_who = case_when(
+    v632 == 6 ~ 4,
+    (v502 != 1 | v213 != 0) ~ NA,
+    TRUE ~ v632
+  )) %>%
+  set_value_labels(fp_dec_who = val_labels(IRdata$v632)) %>%
+  set_variable_labels(fp_dec_who = "Who makes the decision to use or not use family planning")
+
+# Woman participated in decisionmaking about family planning - NEW Indicator in DHS8
+IRdata <- IRdata %>%
+  mutate(fp_dec_wm = case_when(
+    v632 == 1 | v632 == 3 ~ 1,
+    (v502 != 1 | v213 != 0) ~ NA,
+    TRUE ~ 0
+  )) %>%
+  set_value_labels(fp_dec_wm = c(yes = 1, no = 0)) %>%
+  set_variable_labels(fp_dec_wm = "Woman participated in decisionmaking about family planning")
+
+# Pressured to get pregnant - NEW Indicator in DHS8
+IRdata <- IRdata %>%
+  mutate(fp_preg_pressure = case_when(
+    v636 == 1 & v502 == 1 ~ 1,  v502!=1 ~NA,
+    TRUE ~ 0
+  )) %>%
+  set_value_labels(fp_preg_pressure = c(yes = 1, no = 0)) %>%
+  set_variable_labels(fp_preg_pressure = "Pressured by husbands/partners or other family to get pregnant when they did not want to")
+
+
+

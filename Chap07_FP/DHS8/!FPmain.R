@@ -29,7 +29,7 @@ chap <- "Chap07_FP"
 # *******************************************************************************************************************************
 
 ## select your survey
-z
+#z
 # IR Files
 IRdatafile <- "IAIR7EFL.dta"
 # example of file names: MMIR71FL TJIR70FL GHIR72FL UGIR7BFL

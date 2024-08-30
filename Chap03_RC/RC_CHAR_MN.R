@@ -153,7 +153,8 @@ MRdata <- MRdata %>%
     emp == 1 & mv717 == 9 ~ 5,
     emp == 1 & mv717 == 6 ~ 6,
     emp == 1 & (mv717 == 4 | mv717 == 5) ~ 7,
-    emp == 1 & (mv717 == 96 | mv717 == 99 | is.na(mv717)) ~ 9 ),
+    emp == 1 & mv717>9 & mv717<98 ~ 8,
+    emp == 1 & (mv717 == 98 | mv717 == 99 | is.na(mv717)) ~ 9 ),
   rc_occup = add_labels(rc_occup, labels = c("Professional"=1, 
                                  "Clerical"=2,
                                  "Sales and services"=3,
@@ -161,6 +162,7 @@ MRdata <- MRdata %>%
                                  "Unskilled manual"=5, 
                                  "Domestic service"=6,
                                  "Agriculture"=7,
+                                 "Other"=8,
                                  "Don't know/missing"=9)),
   rc_occup = set_label(rc_occup, label = "Occupation among those employed in the past 12 months")) %>%
 
@@ -283,50 +285,54 @@ MRdata <- MRdata %>%
     (rc_smk_freq==1 ) & (cigdaily >= 5 & cigdaily <= 9) ~ 2,
     (rc_smk_freq==1 ) & (cigdaily >= 10 & cigdaily <= 14) ~ 3,
     (rc_smk_freq==1 ) & (cigdaily >= 15 & cigdaily <= 24) ~ 4,
-    (rc_smk_freq==1 ) & (cigdaily >= 25 & cigdaily <= 95) ~ 5,
-    (rc_smk_freq==1 ) & !(cigdaily >= 1 & cigdaily <= 95) ~ 9),
+    (rc_smk_freq==1 ) & (cigdaily >= 25) ~ 5,
+    (rc_smk_freq==1 ) & is.na(cigdaily) ~ 9),
     rc_cig_day = add_labels(rc_cig_day, labels = c("<5"=1, "5-9"=2, "10-14"=3, "15-24"=4, "25+"=5, "Don't know/missing"=9)),
     rc_cig_day = set_label(rc_cig_day, label = "Average number of cigarettes smoked per day"))
 
   MRdata <- MRdata %>%
     mutate(rc_tobc_snuffm = case_when(
-      (mv464h >= 1 & mv464h < 888) |  (mv484h >= 1 & mv484h < 888)  ~ 1, TRUE ~ 0),
-    rc_tobc_snuffm = set_label(rc_tobc_snuffm, label = "Uses snuff smokeless tobacco by mouth"))
-
+      (mv464h >= 1) |  (mv484h >= 1)  ~ 1, TRUE ~ 0),
+      rc_tobc_snuffm = add_labels(rc_tobc_snuffm, labels = c("No"=0, "Yes"=1)),
+      rc_tobc_snuffm = set_label(rc_tobc_snuffm, label = "Uses snuff smokeless tobacco by mouth"))
+  
   MRdata <- MRdata %>%
     mutate(rc_tobc_snuffn = case_when(
-      (mv464i >= 1 & mv464i < 888) |  (mv484i >= 1 & mv484i < 888)  ~ 1, TRUE ~ 0),
-    rc_tobc_snuffn = set_label(rc_tobc_snuffn, label = "Uses snuff smokeless tobacco by nose"))
-
-
+      (mv464i >= 1) |  (mv484i >= 1)  ~ 1, TRUE ~ 0),
+      rc_tobc_snuffn = add_labels(rc_tobc_snuffn, labels = c("No"=0, "Yes"=1)),
+      rc_tobc_snuffn = set_label(rc_tobc_snuffn, label = "Uses snuff smokeless tobacco by nose"))
+  
+  
   MRdata <- MRdata %>%
     mutate(rc_tobc_chew = case_when(
-      (mv464j >= 1 & mv464j < 888) |  (mv484j >= 1 & mv484j < 888)  ~ 1, TRUE ~ 0),
-    rc_tobc_chew = set_label(rc_tobc_chew, label = "Chews tobacco"))
-
-
+      (mv464j >= 1) |  (mv484j >= 1)  ~ 1, TRUE ~ 0),
+      rc_tobc_chew = add_labels(rc_tobc_chew, labels = c("No"=0, "Yes"=1)),
+      rc_tobc_chew = set_label(rc_tobc_chew, label = "Chews tobacco"))
+  
+  
   MRdata <- MRdata %>%
     mutate(rc_tobv_betel = case_when(
-      (mv464k >= 1 & mv464k < 888) |  (mv484k >= 1 & mv484k < 888)  ~ 1, TRUE ~ 0),
-    rc_tobv_betel = set_label(rc_tobv_betel, label = "Uses betel quid with tobacco"))
-
+      (mv464k >= 1) |  (mv484k >= 1)  ~ 1, TRUE ~ 0),
+      rc_tobv_betel = add_labels(rc_tobv_betel, labels = c("No"=0, "Yes"=1)),
+      rc_tobv_betel = set_label(rc_tobv_betel, label = "Uses betel quid with tobacco"))
+  
   MRdata <- MRdata %>%
     mutate(rc_tobc_osmkless = case_when(
-      (mv464l >= 1 & mv464l <= 888) | (mv484l > 1 & mv484l <= 888) ~ 1, TRUE ~ 0),
-    rc_tobc_osmkless = add_labels(rc_tobc_osmkless, labels = c("No"=0, "Yes"=1)),
-    rc_tobc_osmkless = set_label(rc_tobc_osmkless, label = "Uses other type of smokeless tobacco"))
-
+      (mv464l >= 1) | (mv484l > 1) ~ 1, TRUE ~ 0),
+      rc_tobc_osmkless = add_labels(rc_tobc_osmkless, labels = c("No"=0, "Yes"=1)),
+      rc_tobc_osmkless = set_label(rc_tobc_osmkless, label = "Uses other type of smokeless tobacco"))
+  
   MRdata <- MRdata %>%
-      mutate(rc_tobc_anysmkless = case_when(
-      (mv464h >= 1 & mv464h <= 888) | (mv484h >= 1 & mv484h <= 888) | (mv464i >= 1 & mv464i <= 888) | (mv484i >= 1 & mv484i <= 888) |
-      (mv464j >= 1 & mv464j <= 888) | (mv484j >= 1 & mv484j <= 888) | (mv464k >= 1 & mv464k <= 888) | (mv484k >= 1 & mv484k <= 888) |
-      (mv464l >= 1 & mv464l <= 888) | (mv484l >= 1 & mv484l <= 888) ~ 1,
+    mutate(rc_tobc_anysmkless = case_when(
+      (mv464h >= 1) | (mv484h >= 1) | (mv464i >= 1) | (mv484i >= 1) |
+        (mv464j >= 1) | (mv484j >= 1) | (mv464k >= 1) | (mv484k >= 1) |
+        (mv464l >= 1) | (mv484l >= 1) ~ 1,
       TRUE ~ 0),
-    rc_tobc_anysmkless = add_labels(rc_tobc_anysmkless, labels = c("No"=0, "Yes"=1)),
-    rc_tobc_anysmkless = set_label(rc_tobc_anysmkless, label = "Smokes any type of smokeless tobacco"))
-
+      rc_tobc_anysmkless = add_labels(rc_tobc_anysmkless, labels = c("No"=0, "Yes"=1)),
+      rc_tobc_anysmkless = set_label(rc_tobc_anysmkless, label = "Smokes any type of smokeless tobacco"))
+  
   MRdata <- MRdata %>%
     mutate(rc_tobc_any = case_when(
       mv463aa == 1 | mv463aa == 2 | mv463ab == 1 | mv463ab == 2  ~ 1, TRUE ~ 0),
-    rc_tobc_any = add_labels(rc_tobc_any, labels = c("No"=0, "Yes"=1)),
-    rc_tobc_any = set_label(rc_tobc_any, label = "Uses any type of tobacco - smoke or smokeless"))
+      rc_tobc_any = add_labels(rc_tobc_any, labels = c("No"=0, "Yes"=1)),
+      rc_tobc_any = set_label(rc_tobc_any, label = "Uses any type of tobacco - smoke or smokeless"))

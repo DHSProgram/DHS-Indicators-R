@@ -1,10 +1,10 @@
 # ******************************************************************************
-# Program: 			  MS_MAR.do
+# Program: 			  MS_MAR.do - DHS8 upate
 # Purpose: 			  Code to create marital indicators
 # Data inputs: 		IR and MR survey list
 # Data outputs:		coded variables and scalars
-# Author:				  Courtney Allen for code share project
-# Date last modified: August 2022 by Courtney Allen 
+# Author:				  Courtney Allen and Ali Roghani
+# Date last modified: August 20 2024 by Courtney Allen
 # ******************************************************************************
 
 # Variables created in this file ------------------------------------------------
@@ -14,12 +14,10 @@
 # ms_afs_20		"First sexual intercourse by age 20"
 # ms_afs_22		"First sexual intercourse by age 22"
 # ms_afs_25		"First sexual intercourse by age 25"
-# ms_mafs_25		 Median age at first sexual intercourse among age 25-49" (scalar, not a variable)
-# ms_sex_never	"Never had intercourse"
-# ms_sex_4wks   "Sexually active in last four weeks"
-# ms_sex_1yr    "Sexually active in last year"
-# ms_sex_1yrplus "Sexually active in one or more years ago"
-
+# ms_mafs_25		  "Median age at first sexual intercourse among age 25-49" (scalar, not a variable)
+# ms_sex_never	  "Never had intercourse"
+# ms_sex_recent   "Timing of recent sexual activity" 
+#
 # Datafiles created
 #
 # median_sex              datafile with median age at first sex (MAFS) by 5-year age groups among women
@@ -73,7 +71,7 @@ IRdata <- IRdata %>%
   mutate(ms_sex_never = case_when(
     v531==0 ~ 1,
     TRUE ~ 0)) %>%
-  set_value_labels(ms_sex_never = yesno) %>%
+  set_value_labels(ms_sex_never = c("Had sex"=0, "Never"=1)) %>%
   set_variable_labels(ms_sex_never = "Never had sex")
 
 
@@ -118,22 +116,21 @@ IRdata <- IRdata %>%
   set_variable_labels(ms_afs_25 = "First sex by age 25")
 
 
-
 # RECENT SEXUAL ACTIVITY (WOMEN) -----------------------------------------------
 
 
-# Recent sexual activity
+# Timing of recent sexual activity 
 IRdata <- IRdata %>%
   mutate(ms_sex_recent = case_when(
     v528 <= 28 ~ 1,
-    v527 > 128 & v527 < 312 ~ 2,
+    v527 > 128 & v527 < 312 & v528 > 28 ~ 2,
     v527 >= 401 & v527 < 997 ~ 3,
     v531 == 0 ~ 4)) %>%
   set_value_labels(ms_sex_recent = c("Sex in last 4 wks" = 1, 
                                      "Sex in last yr" = 2, 
                                      "Sex in 1 or more yrs" = 3,
                                      "Never had sex" = 4)) %>%
-  set_variable_labels(ms_sex_recent = "Recent sexual activity")
+  set_variable_labels(ms_sex_recent = "Timing of recent sexual activity")
 
 
 
@@ -144,7 +141,7 @@ MRdata <- MRdata %>%
   mutate(ms_sex_never = case_when(
     mv531==0 ~ 1,
     TRUE ~ 0)) %>%
-  set_value_labels(ms_sex_never = yesno) %>%
+  set_value_labels(ms_sex_never = c("Had sex"=0, "Never"=1)) %>%
   set_variable_labels(ms_sex_never = "Never had sex")
 
 
@@ -192,11 +189,11 @@ MRdata <- MRdata %>%
 # RECENT SEXUAL ACTIVITY (MEN) -----------------------------------------------
 
 
-# Recent sexual activity
+# Timing of recent sexual activity
 MRdata <- MRdata %>%
   mutate(ms_sex_recent = case_when(
     mv528 <= 28 ~ 1,
-    mv527 > 128 & mv527 < 312 ~ 2,
+    mv527 > 128 & mv527 < 312 & mv528 > 28 ~ 2,
     mv527 >= 401 & mv527 < 997 ~ 3,
     mv531 == 0 ~ 4)) %>%
   set_value_labels(ms_sex_recent = c("Sex in last 4 wks" = 1, 
@@ -405,4 +402,9 @@ for (a in beg_age_list) {
   }
   
 }
+
+
+
+
+
 

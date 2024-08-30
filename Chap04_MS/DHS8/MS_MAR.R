@@ -3,8 +3,8 @@
 # Purpose: 			  Code to create marital indicators
 # Data inputs: 		IR and MR survey list
 # Data outputs:		coded variables and scalars
-# Author:				  Courtney Allen for code share project
-# Date last modified: August 2022 by Courtney Allen 
+# Author:				  Courtney Allen and Ali Roghani for code share project
+# Date last modified: August 20 by Courtney Allen
 # ******************************************************************************
 
 
@@ -13,16 +13,18 @@
 # ms_mar_stat		"Current marital status"
 # ms_mar_union	"Currently in union"
 # ms_mar_never	"Never in union"
-# ms_afm_15		"First marriage by age 15"
-# ms_afm_18		"First marriage by age 18"
-# ms_afm_20		"First marriage by age 20"
-# ms_afm_22		"First marriage by age 22"
-# ms_afm_25		"First marriage by age 25"
+# ms_mar_regis	"Current marriage is registered with civil authorities" - NEW Indicator in DHS8
+# ms_mar_doc		"Current marriage is registered and has documentation recognizing the marriage" - NEW Indicator in DHS8
+# ms_mar_cert		"Current marriage is registered and has a marriage certificate" - NEW Indicator in DHS8
+# ms_afm_15		  "First marriage by age 15"
+# ms_afm_18		  "First marriage by age 18"
+# ms_afm_20		  "First marriage by age 20"
+# ms_afm_22		  "First marriage by age 22"
+# ms_afm_25		  "First marriage by age 25"
 #
 # ONLY IN IR FILES:
 # ms_cowives_num	"Number of co-wives"
 # ms_cowives_any	"One or more co-wives"
-#
 #
 # ONLY IN MR FILES:
 # ms_wives_num	"Number of wives"
@@ -33,7 +35,6 @@
 # median_mar_subgroup     datafile with median age at first marriage (MAFM) by subgroup characteristics among women 20-49 and 25-49
 # median_mar_men          datafile with median age at first marriage (MAFM) by 5-year age groups among men
 # median_mar_subgroup_men datafile with median age at first marriage (MAFM) by subgroup characteristics among men 25-59 and 30-59 (age range may vary in survey)
-
 
 
 # MEDIAN AGE FUNCTION ----------------------------------------------------------
@@ -90,6 +91,53 @@ IRdata <- IRdata %>%
   set_value_labels(ms_mar_never = c("Not in union" = 1, "In union" = 0)) %>%
   set_variable_labels(ms_mar_never = "Never in union")
 
+# Marriage is registered - NEW Indicator in DHS8
+IRdata <- IRdata %>%
+  mutate(ms_mar_regis = case_when(
+    v502 == 1 & (v542 == 1 | v544 == 1) ~ 1,
+    v502 == 1 &(v542 != 1 & v544 != 1) ~ 0,
+    is.na(v502) & is.na(v542) | is.na(v544) ~ NA 
+  )) %>%
+  set_value_labels(ms_mar_regis = c("Yes" = 1, "No" = 0)) %>%
+  set_variable_labels(ms_mar_regis = "Current marriage is registered with civil authorities")
+
+# Marriage is registered and documented - NEW Indicator in DHS8
+IRdata <- IRdata %>%
+  mutate(ms_mar_doc = case_when(
+    v502 == 1 & (v542==1 | v544==1) & (v543a==1 | v543b==1 | v543c==1 | v543d==1 | v543x==1) ~ 1, 
+    v502 == 1 ~ 0)) %>%
+  set_value_labels(ms_mar_doc = c("Yes" = 1, "No" = 0)) %>%
+  set_variable_labels(ms_mar_doc = "Current marriage is registered and has documentation")
+
+# Marriage is registered and has marriage certificate - NEW Indicator in DHS8
+IRdata <- IRdata %>%
+  mutate(ms_mar_cert = case_when(
+    v502 == 1 & (v542 == 1 | v544 == 1) & (v543a == 1 | v543b == 1) ~ 1,
+    v502 ==1 ~ 0)) %>%
+  set_value_labels(ms_mar_cert = c("Yes" = 1, "No" = 0)) %>%
+  set_variable_labels(ms_mar_cert = "Current marriage is registered and has a marriage certificate")
+
+
+# Count the number of currently married women whose marriage is registered and have a marriage certificate
+num_registered_cert_marriages <- sum(IRdata$ms_mar_cert == 1)
+
+
+# Specific case for Cambodia 2021-22
+if(IRdata$v000[1]=="KH8") {
+IRdata <- IRdata %>% mutate(
+  ms_mar_regis = case_when(
+    v000 == "KH8" & v501 == 1 & (s706 == 1 | v544 == 1) ~ 1,
+    v501==1 ~ 0),
+  ms_mar_doc = case_when(
+    v000 == "KH8" ~ NA),
+  ms_mar_cert = case_when(
+    v000 == "KH8" & v501 == 1 & s706 == 1 ~ 1,
+    v501 == 1 ~ 0)) %>%
+  set_variable_labels(
+    ms_mar_regis = "Current marriage is registered with civil authorities",
+    ms_mar_doc = "NA - Current marriage is registered and has documentation recognizing the marriage",
+    ms_mar_cert = "Current marriage is registered and has a marriage certificate")
+}
 
 
 # CO-WIVES (WOMEN)--------------------------------------------------------------
@@ -292,7 +340,7 @@ for (a in beg_age_list) {
 	  for(y in subgroup) {  
 	    
 	    # generate list of unique levels for each subgroup
-	    z <- as.vector(remove_val_labels(unique(IRdata[[y]])))
+	    z <- as.vector(remove_val_labels(sort(unique(IRdata[[y]]))))
 	    
 	    # loop through each level of each subgroup
 	    for(x in z) {
@@ -385,7 +433,7 @@ for (a in beg_age_list) {
 	  for(y in subgroup) {  
 	    
 	    # generate list of unique levels for each subgroup
-	    z <- as.vector(remove_val_labels(unique(MRdata[[y]])))
+	    z <- as.vector(remove_val_labels(sort(unique(MRdata[[y]]))))
 	    
 	    # loop through each level of each subgroup
 	    for(x in z) {
@@ -398,7 +446,6 @@ for (a in beg_age_list) {
 	      
 	      # weight data
 	      dhssvy2 <- svydesign(id = temp_df$mv021, strata=temp_df$mv022, weights = temp_df$mv005/1000000, data=temp_df)
-	      
 	      median_age <- calc_median_age()
 	      
 	      
@@ -410,5 +457,11 @@ for (a in beg_age_list) {
 	  }
 	  
 	}
+	
+	
+
+
+	
+	
 	
 	

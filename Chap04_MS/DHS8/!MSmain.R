@@ -1,11 +1,11 @@
 # /*******************************************************************************************************************************
-# Program: 				MSmain.R
+# Program: 				MSmain.R - DHS8 update
 # Purpose: 				Main file for the Marriage and Sexual Activity Chapter. 
 # The main file will call other source files that will produce the MS indicators and produce tables.
 # Data outputs:		coded variables and table output on screen and in excel tables.  
 # Author: 			        Courtney Allen
-# Translated to R:      Courtney Allen 
-# Date last modified:		September 1, 2022
+# Translated to R:      Courtney Allen and Ali Roghani 
+# Date last modified:   August 2024 by Courtney Allen		
 
 # *******************************************************************************************************************************/
   
@@ -13,7 +13,6 @@ rm(list = ls(all = TRUE))
 
 
 library(tidyverse)  # most variable creation here uses tidyverse 
-library(tidyselect) # used to select variables in FP_EVENTS.R
 library(haven)      # used for Haven labeled DHS variables
 library(labelled)   # used for Haven labeled variable creation
 library(expss)      # for creating tables with Haven labeled data
@@ -26,16 +25,16 @@ library(survey)     # survey weight data to find median ages
 here()
 
 # path for this chapter. This is also where the data is stored
-chap <- "Chap04_MS"
+chap <- "Chap04_MS/DHS8"
 
 # select your survey
 
 # IR Files
-IRdatafile <-  "GMIR81FL.dta"
-#AFIR71FL.dta GMIR81FL.dta
+IRdatafile <- "GHIR8AFL.dta"
+
 
 # MR Files
-MRdatafile <- "GMMR81FL.dta"
+MRdatafile <- "GHMR8AFL.dta"
 
 # ****************************
 

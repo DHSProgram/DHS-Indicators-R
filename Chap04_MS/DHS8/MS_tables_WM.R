@@ -1,8 +1,8 @@
 # /*****************************************************************************************************
-# Program: 			MS_tables_WM.R
+# Program: 			MS_tables_WM.R - DHS8 Update
 # Purpose: 			produce tables for indicators
 # Author:				Courtney Allen
-# Date last modified: August 2022 by Courtney Allen
+# Date last modified: August 20 2024 by Courtney Allen
 #
 # Note this do file will produce the following tables in excel:
 # 1. 	Tables_MS_wm:		Contains the tables for martial and sexual activity indicators for women
@@ -45,7 +45,7 @@ table_temp <- IRdata %>%
 # save to workbook
 sh = addWorksheet(wb, "Mar status")
 xl_write(table_temp, wb, sh)
-saveWorkbook(wb, "Chap04_MS/Tables_MS_wm.xlsx", overwrite = TRUE)
+saveWorkbook(wb, here(chap,"Tables_MS_wm.xlsx"), overwrite = TRUE)
 
 # create table of currently married by age
 table_temp <- IRdata %>% 
@@ -62,12 +62,31 @@ table_temp <- IRdata %>%
 # save to workbook
 sh = addWorksheet(wb, "Current mar")
 xl_write(table_temp, wb, sh)
-saveWorkbook(wb, "Chap04_MS/Tables_MS_wm.xlsx", overwrite = TRUE)
+saveWorkbook(wb, here(chap,"Tables_MS_wm.xlsx"), overwrite = TRUE)
 
+########################################
+# create table of Marriage registration by background variables
+table_temp <- IRdata %>% 
+  cross_rpct(
+    subgroup = v502==1,
+    cell_vars = list(v013, v025, v024, v190),
+    col_vars = list(ms_mar_regis, ms_mar_doc, ms_mar_cert, total()),
+    weight = wt, 
+    total_label = c("Total 15-49", "Number of women"),
+    total_statistic = c("w_rpct", "w_cases"),
+    total_row_position = c("below"),
+    expss_digits(digits=1)) %>% 
+  set_caption("Marriage registered")
+
+# save to workbook
+sh = addWorksheet(wb, "Mar registered")
+xl_write(table_temp, wb, sh)
+saveWorkbook(wb, here(chap,"Tables_MS_wm.xlsx"), overwrite = TRUE)
 
 # create table of number of co-wives by age, residence, education, wealth
 table_temp <- IRdata %>% 
   cross_rpct(
+    subgroup = v502==1,
     cell_vars = list(v013, v025, v106, v190),
     col_vars = list(ms_cowives_num, ms_cowives_any, total()),
     weight = wt, 
@@ -81,7 +100,7 @@ table_temp <- IRdata %>%
 # save to workbook
 sh = addWorksheet(wb, "Cowives")
 xl_write(table_temp, wb, sh)
-saveWorkbook(wb, "Chap04_MS/Tables_MS_wm.xlsx", overwrite = TRUE)
+saveWorkbook(wb, here(chap,"Tables_MS_wm.xlsx"), overwrite = TRUE)
 
 
 # create table of age at marriage by age
@@ -102,18 +121,18 @@ table_temp <- IRdata %>%
 # save to workbook
 sh = addWorksheet(wb, "Mar age")
 xl_write(table_temp, wb, sh)
-saveWorkbook(wb, "Chap04_MS/Tables_MS_wm.xlsx", overwrite = TRUE)
+saveWorkbook(wb, here(chap,"Tables_MS_wm.xlsx"), overwrite = TRUE)
 
 
 # create worksheet for median age at first marriage results
 sh = addWorksheet(wb, "Median mar age")
 writeData(wb, sheet = "Median mar age", x = median_mar, colNames = TRUE)
-saveWorkbook(wb, "Chap04_MS/Tables_MS_wm.xlsx", overwrite = TRUE)
+saveWorkbook(wb, here(chap,"Tables_MS_wm.xlsx"), overwrite = TRUE)
 
 # create worksheet for median age at first marriage by subgroup results
 sh = addWorksheet(wb, "Median mar age subgroup")
 writeData(wb, sheet = "Median mar age subgroup", x = median_mar_subgroup, colNames = TRUE)
-saveWorkbook(wb, "Chap04_MS/Tables_MS_wm.xlsx", overwrite = TRUE)
+saveWorkbook(wb, here(chap,"Tables_MS_wm.xlsx"), overwrite = TRUE)
 
 
 # create table of age at first sex
@@ -131,18 +150,18 @@ table_temp <- IRdata %>%
 # save to workbook
 sh = addWorksheet(wb, "Sex age")
 xl_write(table_temp, wb, sh)
-saveWorkbook(wb, "Chap04_MS/Tables_MS_wm.xlsx", overwrite = TRUE)
+saveWorkbook(wb, here(chap,"Tables_MS_wm.xlsx"), overwrite = TRUE)
 
 
 # create worksheet for median age at first sex results
 sh = addWorksheet(wb, "Median sex age")
 writeData(wb, sheet = "Median sex age", x = median_sex, colNames = TRUE)
-saveWorkbook(wb, "Chap04_MS/Tables_MS_wm.xlsx", overwrite = TRUE)
+saveWorkbook(wb, here(chap,"Tables_MS_wm.xlsx"), overwrite = TRUE)
 
 # create worksheet for median age at first sex by subgroup results
 sh = addWorksheet(wb, "Median sex age subgroup")
 writeData(wb, sheet = "Median sex age subgroup", x = median_sex_subgroup, colNames = TRUE)
-saveWorkbook(wb, "Chap04_MS/Tables_MS_wm.xlsx", overwrite = TRUE)
+saveWorkbook(wb, here(chap,"Tables_MS_wm.xlsx"), overwrite = TRUE)
 
 # create table for recent sexual activity by age, residence, education, and wealth
 table_temp <- IRdata %>% 
@@ -154,11 +173,11 @@ table_temp <- IRdata %>%
     total_statistic = c("w_rpct", "w_cases"),
     total_row_position = c("below"),
     expss_digits(digits=1)) %>% 
-  set_caption("Recent sexual activity")
+  set_caption("Timing of recent sexual activity")
 
 
 # save to workbook
 sh = addWorksheet(wb, "Sexual activity")
 xl_write(table_temp, wb, sh)
-saveWorkbook(wb, "Chap04_MS/Tables_MS_wm.xlsx", overwrite = TRUE)
+saveWorkbook(wb, here(chap,"Tables_MS_wm.xlsx"), overwrite = TRUE)
 

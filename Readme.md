@@ -45,31 +45,40 @@ In Stata the tabout command is used to create tables. This is a package that nee
 ### R
 These scripts typically use `expss` package to create tables that can utilize survey weights and labelled data. More recent scripts use `openxlsx` package to export tables to excel. Older scripts may use `xlsx` package. 
 
+### DHS8 updates
+The DHS Program is making updates and adding new indicators in DHS Phase 8. 
 
+Please check the IndicatorList excel file for the updated list of indicators and their labels. Each chapter of the Code Share Library will contain a subfolder for DHS8 updates when they are available. Updates will begin with the Stata code which will be completed in September 2023 and updates to R and SPSS code will be completed in September 2024. 
+
+Currently DHS8 updates to Chapters 3 and 4 are available. 
+
+NOTE: WASH indicators are found in Chapter 16 in the updated DHS Guide to Statistics, but found in Chapter 2 in this repository.
+
+There are no changes in DHS8 for the chapters that cover adult and maternal mortality (AM), female genital cutting (FG), and Fistula (FS).  
 **********************************************************************************************************************************************************
 
 ## Chapter codes
 
-|Ch. | Title | Ch. Acronym |
-|---|---|---|
-|   2|Population & Housing|PH|
-|   3|Respondents? Characteristics|RC|
-|   4|Marriage & Sexual Activity|MS|
-|   5|   Fertility|FE|
-|   6|   Fertility Preferences|FF|
-|   7|   Family Planning |FP|
-|   8|   Infant & Child Mortality|CM|
-|   9|   Reproductive Health|RH|
-|  10|   Child Health|CH|
-|  11|   Nutrition of Children & Adults|NT|
-|  12|   Malaria| ML|
-|  13|   HIV-AIDS Knowledge, Attitudes, & Behaviors |HK|
-|  14|   HIV Prevalence|HV|
-|  15|   Women's Empowerment|WE|
-|  16|   Adult & Maternal Mortality|AM|
-|  17|   Domestic Violence|DV|
-|  18|	 Female Genital Cutting|FG|
-|  19|	 Fistula |FS|
+|Ch. | Title | Ch. Acronym | Code Available for DHS8? |
+|---|---|---|---|
+|   2|Population & Housing|PH|Forthcoming|
+|   3|Respondents? Characteristics|RC|Yes|
+|   4|Marriage & Sexual Activity|MS|Yes|
+|   5|   Fertility|FE|Forthcoming|
+|   6|   Fertility Preferences|FF|Forthcoming|
+|   7|   Family Planning |FP|Forthcoming|
+|   8|   Infant & Child Mortality|CM|Forthcoming|
+|   9|   Reproductive Health|RH|Forthcoming|
+|  10|   Child Health|CH|Forthcoming|
+|  11|   Nutrition of Children & Adults|NT|Forthcoming|
+|  12|   Malaria| ML|Forthcoming|
+|  13|   HIV-AIDS Knowledge, Attitudes, & Behaviors |HK|Forthcoming|
+|  14|   HIV Prevalence|HV|Forthcoming|
+|  15|   Women's Empowerment|WE|Forthcoming|
+|  16|   Adult & Maternal Mortality|AM|No Changes in DHS8|
+|  17|   Domestic Violence|DV|Forthcoming|
+|  18|	 Female Genital Cutting|FG|No Changes in DHS8|
+|  19|	 Fistula |FS|No Changes in DHS8|
 
 **********************************************************************************************************************************************************
 

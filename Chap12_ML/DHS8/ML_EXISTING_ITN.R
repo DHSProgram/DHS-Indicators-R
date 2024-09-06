@@ -1,10 +1,10 @@
 # ******************************************************************************
-# Program: 		ML_EXISTING_ITN.R
+# Program: 		ML_EXISTING_ITN.R - No changes in DHS8
 # Purpose: 		Code for source of nets  
 # Data inputs: 		HR survey list
 # Data outputs:		coded variables
 # Author:		Cameron Taylor - translated to R by Mahmoud Elkasabi
-# Date last modified: January 07, 2022 by Mahmoud Elkasabi
+# Date last modified: August 02, 2024 by Courtney Allen for DHS8 updates
 # ******************************************************************************
 # -----------------------------------------------------------------------------#
 # # Variables created in this file:
@@ -40,17 +40,17 @@ HRdata_long <- merge(HRdata_long,
 HRdata_long <- HRdata_long %>%
   mutate(ml_sleepnet = case_when(
     hml21==1   ~ 1,
-    TRUE ~ 0),
-    ml_sleepnet = add_labels(ml_sleepnet, labels = c("No"=0, "Yes"=1)),
-    ml_sleepnet = set_label(ml_sleepnet, label = "Someone slept under net last night"))
+    TRUE ~ 0)) %>%
+    set_value_labels(ml_sleepnet = c("Yes"= 1, "No" = 0)) %>%
+      set_variable_labels(ml_sleepnet, label= "Someone slept under net last night")
 
 # Net is an ITN
 HRdata_long <- HRdata_long %>%
   mutate(ml_ownnet = case_when(
     hml10==1   ~ 1,
-    TRUE ~ 0),
-    ml_ownnet = add_labels(ml_ownnet, labels = c("No"=0, "Yes"=1)),
-    ml_ownnet = set_label(ml_ownnet, label = "Net is an ITN"))
+    TRUE ~ 0) %>%
+      set_value_labels(ml_ownnet = c("Yes"= 1, "No" = 0)) %>%
+      set_variable_labels(ml_ownnet, label= "Net is an ITN"))
 
 HRdata_long <- HRdata_long %>%
   mutate(wt = hv005/1000000)
@@ -58,7 +58,7 @@ HRdata_long <- HRdata_long %>%
 # Use of existing ITNs
 table_temp <-  HRdata_long %>% 
   filter(ml_ownnet==1) %>% 
-  calc_cro_rpct(
+  cross_rpct(
     cell_vars = list(hv025, hv024, hv270, total()),
     col_vars = list(ml_sleepnet),
     weight = wt,
@@ -67,5 +67,8 @@ table_temp <-  HRdata_long %>%
     expss_digits(digits=1)) %>%   
    set_caption("Use of existing ITNs")
 
-write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "hh_ITN_use",append=TRUE)
+# save to workbook
+sh = addWorksheet(wb, "hh_ITN_use")
+xl_write(table_temp, wb, sh)
+saveWorkbook(wb, here(chap, "Tables_ML.xlsx"), overwrite = TRUE)
 

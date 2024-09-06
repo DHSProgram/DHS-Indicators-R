@@ -4,7 +4,7 @@
 # Data inputs: 		PR survey list
 # Data outputs:		coded variables and tables
 # Author:		Cameron Taylor and Shireen Assaf - translated to R by Mahmoud Elkasabi
-# Date last modified: January 12, 2022 by Mahmoud Elkasabi
+# Date last modified: September 5, 2024 by Courtney Allen
 # ******************************************************************************
 # -----------------------------------------------------------------------------#
 # # Variables created in this file:
@@ -22,22 +22,22 @@
 # Tested for Anemia
 PRdata <- PRdata %>%
   mutate(ml_test_anemia = case_when(
-    hv103==1 & hc1>=6 & hc1<=59 & hv042==1 & hc55!=0 ~ 0,
-    hv103==1 & hc1>=6 & hc1<=59 & hv042==1 & hc55==0 ~ 1),
+    hv120==1 & hv103==1 & hc1>=6 & hc1<=59 & hv042==1 & hc55!=0 ~ 0,
+    hv120==1 & hv103==1 & hc1>=6 & hc1<=59 & hv042==1 ~ 1),
     ml_test_anemia = set_label(ml_test_anemia, label = "Tested for anemia in children 6-59 months"))
 
 # Tested for Parasitemia via microscopy
 PRdata <- PRdata %>%
   mutate(ml_test_micmal = case_when(
-    hv103==1 & hc1>=6 & hc1<=59 & hv042==1 & !(hml32==0 | hml32==1 | hml32==6)  ~ 0,
-    hv103==1 & hc1>=6 & hc1<=59 & hv042==1 & (hml32==0 | hml32==1 | hml32==6)  ~ 1),
+    hv120==1 & hv103==1 & hc1>=6 & hc1<=59 & hv042==1 & (hml32==0 | hml32==1 | hml32==6)  ~ 1,
+    hv120==1 & hv103==1 & hc1>=6 & hc1<=59 & hv042==1  ~ 0),
     ml_test_micmal = set_label(ml_test_micmal, label = "Tested for Parasitemia (via microscopy) in children 6-59 months"))
 
 # Tested for Parasitemia via RDT
 PRdata <- PRdata %>%
   mutate(ml_test_rdtmal = case_when(
-    hv103==1 & hc1>=6 & hc1<=59 & hv042==1 & !(hml35==0 | hml35==1)  ~ 0,
-    hv103==1 & hc1>=6 & hc1<=59 & hv042==1 & (hml35==0 | hml35==1)  ~ 1),
+    hv120==1 & hv103==1 & hc1>=6 & hc1<=59 & hv042==1 & (hml35==0 | hml35==1)  ~ 1,
+    hv120==1 & hv103==1 & hc1>=6 & hc1<=59 & hv042==1  ~ 0),
     ml_test_rdtmal = set_label(ml_test_rdtmal, label = "Tested for Parasitemia (via RDT) in children 6-59 months"))
 
 # Prevalence
@@ -45,8 +45,8 @@ PRdata <- PRdata %>%
 # Anemia in children 6-59 months
 PRdata <- PRdata %>%
   mutate(ml_anemia = case_when(
-    hv103==1 & hc1>=6 & hc1<=59 & hc55==0 & hv042==1 & !(hc56<80)  ~ 0,
-    hv103==1 & hc1>=6 & hc1<=59 & hc55==0 & hv042==1 & hc56<80  ~ 1),
+    hv103==1 & hc1>=6 & hc1<=59 & hc55==0 & hv042==1 & hc56<80  ~ 1,
+    hv103==1 & hc1>=6 & hc1<=59 & hc55==0 & hv042==1  ~ 0),
     ml_anemia = set_label(ml_anemia, label = "Anemia in children 6-59 months"))
 
 # Parasitemia (via microscopy) in children 6-59 months

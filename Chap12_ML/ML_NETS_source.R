@@ -4,7 +4,7 @@
 # Data inputs: 		HR survey list
 # Data outputs:		coded variables and tables
 # Author:		Cameron Taylor - translated to R by Mahmoud Elkasabi
-# Date last modified: January 07, 2022 by Mahmoud Elkasabi
+# Date last modified: September 5, 2024 by Courtney Allen
 # ******************************************************************************
 # -----------------------------------------------------------------------------#
 # # Variables created in this file:
@@ -81,7 +81,7 @@ HRdata_long <- HRdata_long %>%
 
 # Source of mosquito nets
 table_temp <-  HRdata_long %>% 
-  calc_cro_rpct(
+  cross_rpct(
     cell_vars = list(hv025, hv024, hv270, total()),
     col_vars = list(ml_net_source),
     weight = wt,

@@ -4,7 +4,7 @@
 # Data inputs: 		HR and PR survey list
 # Data outputs:		coded variables and tables
 # Author:		Cameron Taylor and modified by Shireen Assaf for the code share project - translated to R by Mahmoud Elkasabi
-# Date last modified: January 12, 2022 by Mahmoud Elkasabi
+# Date last modified: September 5, 2024 by Courtney Allen
 # ******************************************************************************
 # -----------------------------------------------------------------------------#
 # # Variables created in this file:
@@ -55,7 +55,7 @@ HRmerge <- HRmerge %>%
 # Number of ITNs by number of persons who stayed in the household the night before the survey
 table_temp <-  HRmerge %>% 
   filter(hv103==1) %>%
-  calc_cro_rpct(
+  cross_rpct(
     cell_vars = list(numdefacto),
     col_vars = list(ml_numitnhh),
     weight = wt,
@@ -109,7 +109,7 @@ HRmerge <- HRmerge %>%
 # Slept under an ITN last night among households with at least 1 ITN
 table_temp <-  HRmerge %>% 
   filter(hv103==1) %>%
-  calc_cro_rpct(
+  cross_rpct(
     cell_vars = list(age, hv104, hv025, hv024, hv270, total()),
     col_vars = list(ml_slept_itn_hhitn),
     weight = wt,
@@ -123,7 +123,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "pr_slept_1itn",append=TRUE
 # Slept under an ITN last night among households with at least 1 ITN - Children under 5
 table_temp <-  HRmerge %>% 
   filter(hv103==1 & hml16<5) %>%
-  calc_cro_rpct(
+  cross_rpct(
     cell_vars = list(hv025, hv024, hv270, total()),
     col_vars = list(ml_slept_itn_hhitn),
     weight = wt,
@@ -138,7 +138,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "pr_chldslept_1itn",append=
 # Slept under an ITN last night among households with at least 1 ITN - Pregnant women age 15-49
 table_temp <-  HRmerge %>% 
   filter(hv103==1 & hv104==2 & hml18==1 & hml16>=15 & hml16<=49) %>%
-  calc_cro_rpct(
+  cross_rpct(
     cell_vars = list(hv025, hv024, hv270, total()),
     col_vars = list(ml_slept_itn_hhitn),
     weight = wt,

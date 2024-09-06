@@ -3,7 +3,7 @@
 # Purpose: 		    produce tables for indicators
 # Data outputs:		tables on screen and in excel sheets
 # Author:				  Cameron Taylor - translated to R by Mahmoud Elkasabi
-# Date last modified: January 12, 2022 by Mahmoud Elkasabi
+# Date last modified: September 5, 2024 by Courtney Allen
 # ******************************************************************************
 # Note this do file will produce the following tables in excel:
 # 6. Tables_FEVER:	Contains tables on fever careseeking for children under 5 (fever, treatment seeking)
@@ -42,7 +42,7 @@ KRdata <- KRdata %>%
 # Fever and care seeking for fever
 # Children under age 5 years with fever in the 2 weeks preceding the survey
 table_temp <-  KRdata %>% 
-  calc_cro_rpct(
+  cross_rpct(
     cell_vars = list(agecat, b4, v025, v024, v106, v190, total()),
     col_vars = list(ml_fever),
     weight = wt,
@@ -55,7 +55,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "kr_fever",append=TRUE)
 
 # Among children under age 5 years with fever in the 2 weeks preceding the survey, percentage for whom advice or treatment was sought
 table_temp <-  KRdata %>% 
-  calc_cro_rpct(
+  cross_rpct(
     cell_vars = list(agecat, b4, v025, v024, v106, v190, total()),
     col_vars = list(ml_fev_care),
     weight = wt,
@@ -68,7 +68,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "kr_fev_care",append=TRUE)
 
 # Among children under age 5 years with fever in the 2 weeks preceding the survey, percentage for whom advice or treatment was sought the same or next day
 table_temp <-  KRdata %>% 
-  calc_cro_rpct(
+  cross_rpct(
     cell_vars = list(agecat, b4, v025, v024, v106, v190, total()),
     col_vars = list(ml_fev_care_day),
     weight = wt,
@@ -81,7 +81,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "kr_fev_day",append=TRUE)
 
 # Children under age 5 years with fever in the 2 weeks preceding the survey who had blood taken from a finger or heel for testing
 table_temp <-  KRdata %>% 
-  calc_cro_rpct(
+  cross_rpct(
     cell_vars = list(agecat, b4, v025, v024, v106, v190, total()),
     col_vars = list(ml_stick),
     weight = wt,
@@ -121,7 +121,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "kr_source_sought",append=T
 ### Antimalarial drugs
 # Among children under age 5 years with fever in the 2 weeks preceding the survey who took any antimalarial medication, percentage who took an ACT
 table_temp <-  KRdata %>% 
-  calc_cro_rpct(
+  cross_rpct(
     cell_vars = list(agecat, b4, v025, v024, v106, v190, total()),
     col_vars = list(ml_act),
     weight = wt,
@@ -134,7 +134,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "kr_ACT",append=TRUE)
 
 # Among children under age 5 years with fever in the 2 weeks preceding the survey who took any antimalarial medication, percentage who took SP/Fansider
 table_temp <-  KRdata %>% 
-  calc_cro_rpct(
+  cross_rpct(
     cell_vars = list(agecat, b4, v025, v024, v106, v190, total()),
     col_vars = list(ml_sp_fan),
     weight = wt,
@@ -147,7 +147,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "kr_SP",append=TRUE)
 
 # Among children under age 5 years with fever in the 2 weeks preceding the survey who took any antimalarial medication, percentage who took Chloroquine
 table_temp <-  KRdata %>% 
-  calc_cro_rpct(
+  cross_rpct(
     cell_vars = list(agecat, b4, v025, v024, v106, v190, total()),
     col_vars = list(ml_chloro),
     weight = wt,
@@ -160,7 +160,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "kr_Chloroquine",append=TRU
 
 # Among children under age 5 years with fever in the 2 weeks preceding the survey who took any antimalarial medication, percentage who took Amodiaquine
 table_temp <-  KRdata %>% 
-  calc_cro_rpct(
+  cross_rpct(
     cell_vars = list(agecat, b4, v025, v024, v106, v190, total()),
     col_vars = list(ml_amodia),
     weight = wt,
@@ -173,7 +173,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "kr_Amodiaquine",append=TRU
 
 # Among children under age 5 years with fever in the 2 weeks preceding the survey who took any antimalarial medication, percentage who took Quinine pills
 table_temp <-  KRdata %>% 
-  calc_cro_rpct(
+  cross_rpct(
     cell_vars = list(agecat, b4, v025, v024, v106, v190, total()),
     col_vars = list(ml_quin_pill),
     weight = wt,
@@ -186,7 +186,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "kr_Quinine",append=TRUE)
 
 # Among children under age 5 years with fever in the 2 weeks preceding the survey who took any antimalarial medication, percentage who took Quinine injection or IV
 table_temp <-  KRdata %>% 
-  calc_cro_rpct(
+  cross_rpct(
     cell_vars = list(agecat, b4, v025, v024, v106, v190, total()),
     col_vars = list(ml_quin_inj),
     weight = wt,
@@ -199,7 +199,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "kr_Quinine_inj",append=TRU
 
 # Among children under age 5 years with fever in the 2 weeks preceding the survey who took any antimalarial medication, percentage who took Artesunate rectal
 table_temp <-  KRdata %>% 
-  calc_cro_rpct(
+  cross_rpct(
     cell_vars = list(agecat, b4, v025, v024, v106, v190, total()),
     col_vars = list(ml_artes_rec),
     weight = wt,
@@ -212,7 +212,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "kr_Artesunate",append=TRUE
 
 # Among children under age 5 years with fever in the 2 weeks preceding the survey who took any antimalarial medication, percentage who took Artesunate injection or intravenous
 table_temp <-  KRdata %>% 
-  calc_cro_rpct(
+  cross_rpct(
     cell_vars = list(agecat, b4, v025, v024, v106, v190, total()),
     col_vars = list(ml_artes_inj),
     weight = wt,
@@ -225,7 +225,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "kr_Artesunate_inj",append=
 
 # Among children under age 5 years with fever in the 2 weeks preceding the survey who took any antimalarial medication, percentage who took other antimalarial
 table_temp <-  KRdata %>% 
-  calc_cro_rpct(
+  cross_rpct(
     cell_vars = list(agecat, b4, v025, v024, v106, v190, total()),
     col_vars = list(ml_antimal_other),
     weight = wt,

@@ -1,10 +1,10 @@
 # ******************************************************************************
-# Program: 		ML_NETS_use.R
+# Program: 		ML_NETS_use.R - No changes in DHS8
 # Purpose: 		Code for source of net use 
 # Data inputs: 		PR survey list
 # Data outputs:		coded variables and tables
 # Author:		Cameron Taylor - translated to R by Mahmoud Elkasabi
-# Date last modified: January 12, 2022 by Mahmoud Elkasabi
+# Date last modified: August 02, 2024 by Courtney Allen for DHS8 update
 # ******************************************************************************
 # -----------------------------------------------------------------------------#
 # # Variables created in this file:

@@ -3,7 +3,7 @@
 # Purpose: 		    produce tables for indicators
 # Data outputs:		tables in excel sheets
 # Author:				  Cameron Taylor - translated to R by Mahmoud Elkasabi
-# Date last modified: December 12, 2022 by Mahmoud Elkasabi
+# Date last modified: September 5, 2024 by Courtney Allen
 # ******************************************************************************
 # Note this do file will produce the following tables in excel:
 #1. Tables_HH_ITN:		Contains the tables for houeshold possession of ITNs 
@@ -14,7 +14,7 @@ HRdata <- HRdata %>%
     
 # Household ownership of one mosquito net
 table_temp <-  HRdata %>% 
-  calc_cro_rpct(
+  cross_rpct(
     cell_vars = list(hv025, hv024, hv270, total()),
     col_vars = list(ml_mosquitonet),
     weight = wt,
@@ -27,7 +27,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "hh_net",append=TRUE)
 
 # Household ownership of ITNs
 table_temp <-  HRdata %>% 
-  calc_cro_rpct(
+  cross_rpct(
     cell_vars = list(hv025, hv024, hv270, total()),
     col_vars = list(ml_itnhh),
     weight = wt,
@@ -62,7 +62,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "hh_ITN_average",append=TRU
 
 # Households with at least one mosquito net for every 2 persons 
 table_temp <-  HRdata %>% 
-  calc_cro_rpct(
+  cross_rpct(
     cell_vars = list(hv025, hv024, hv270, total()),
     col_vars = list(ml_mosnethhaccess),
     weight = wt,
@@ -76,7 +76,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "hh_net_for2",append=TRUE)
 # Households with at least one ITN for every 2 persons 
 table_temp <-  HRdata %>% 
   filter(hv013>=1) %>%
-  calc_cro_rpct(
+  cross_rpct(
     cell_vars = list(hv025, hv024, hv270, total()),
     col_vars = list(ml_hhaccess),
     weight = wt,

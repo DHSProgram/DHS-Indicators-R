@@ -85,12 +85,26 @@
 IRdata <- IRdata %>%
   mutate(dv_phy =
            case_when(
-             d105a>0 | d105b>0 | d105c>0 | d105d>0 | d105e>0 | d105f>0 | d105g>0 |d105j>0 ~ 1, # violence by current partner
-             d130a>0  ~ 1,  # violence by former partner
-             d115y==0 ~ 1, # violence by anyone other than partner
-             d118y==0 ~ 1, # violence during pregnancy 
-             v044==1  ~ 0 )) %>% 
-  set_value_labels(dv_phy = c("Yes" = 1, "No"=0)) %>%
+             # Check for violence only if v044 == 1 (woman was selected for domestic violence questions)
+             v044 == 1 & (
+               (d105a >= 1 & d105a <= 4) |
+                 (d105b >= 1 & d105b <= 4) |
+                 (d105c >= 1 & d105c <= 4) |
+                 (d105d >= 1 & d105d <= 4) |
+                 (d105e >= 1 & d105e <= 4) |
+                 (d105f >= 1 & d105f <= 4) |
+                 (d105g >= 1 & d105g <= 4) |
+                 (d105j >= 1 & d105j <= 4)) ~ 1,  # Violence by current partner
+             
+             v044 == 1 & d130a >= 1 & d130a <= 4 ~ 1,  # Violence by former partner
+             
+             v044 == 1 & d115y == 0 ~ 1,  # Violence by anyone other than partner
+             
+             v044 == 1 & d118y == 0 ~ 1,  # Violence during pregnancy
+             
+             v044 == 1 ~ 0  # If none of the above and v044 == 1, no violence
+           )) %>% 
+  set_value_labels(dv_phy = c("Yes" = 1, "No" = 0)) %>%
   set_variable_labels(dv_phy = "Experienced physical violence since age 15")
 
 # //In the last 12 months

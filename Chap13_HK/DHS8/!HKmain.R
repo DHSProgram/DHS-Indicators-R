@@ -1,11 +1,11 @@
 # /*******************************************************************************************************************************
-# Program: 				HKmain.do
+# Program: 				HKmain.do - DHS8 update
 # Purpose: 				Main file for the HIV Knowledge, Attitudes, and Behavior Chapter. 
 # The main file will call other source files that will produce the MS indicators and produce tables.
 # Data outputs:		coded variables and table output on screen and in excel tables.  
 # Author: 				Courtney Allen
 # Translated to R:Courtney Allen
-# Date last modified:		September 5, 2022
+# Date last modified:		August 15, 2024 by Courtney Allen
 
 # *******************************************************************************************************************************/
 
@@ -25,42 +25,41 @@ library(here)       # to get R project path
 here()
 
 # path for this chapter. This is also where the data is stored
-chap <- "Chap13_HK"
+chap <- "Chap13_HK/DHS8/"
 
 # select your survey
 
 # IR Files
-IRdatafile <-  "UGIR7BFL.dta"
-#AFIR71FL.dta GMIR81FL.dta
+IRdatafile <-  "TZIR82FL.dta"
 
 # MR Files
-MRdatafile <- "UGMR7BFL.dta"
-#AFIR71FL.dta GMIR81FL.dta
+MRdatafile <- "TZMR82FL.dta"
 
 # ****************************
 
 # IR (women) and MR (men) file variables
 
-# open dataset
+# open datasets
 IRdata <-  read_dta(here(chap,IRdatafile))
+MRdata <-  read_dta(here(chap,MRdatafile))
 
 # do separate R scripts for each subtopic
-source(here(paste0(chap,"/HK_KNW_ATD.R")))
+source(here(chap,"HK_KNW_ATD.R"))
 #Purpose: 	Code marital status variables
 
-source(here(paste0(chap,"/HK_RSKY_BHV.R")))
+source(here(chap,"HK_RSKY_BHV.R"))
 #Purpose: 	Code multiple sex partners and higher risk sex variables
 
-source(here(paste0(chap,"/HK_TEST_CONSL.R")))
+source(here(chap,"HK_TEST_CONSL.R"))
 #Purpose: 	Code HIV testing and counseling variables 
 
-source(here(paste0(chap,"/HK_STI.R")))
+source(here(chap,"HK_STI.R"))
 #Purpose: 	Code HIV testing and counseling variables
 
-source(here(paste0(chap,"/HK_BHV_YNG.R")))
+source(here(chap,"HK_BHV_YNG.R"))
 #Purpose: 	Code HIV variables among young people
 
-source(here(paste0(chap,"/HK_tables_WM.R")))
+source(here(chap,"HK_tables_WM.R"))
 #Purpose: 	Produce tables for indicators computed above. 
 
 # ****************************
@@ -69,15 +68,12 @@ source(here(paste0(chap,"/HK_tables_WM.R")))
 
 # MR (men) only file variables
 
-# open dataset
-MRdata <-  read_dta(here(chap,MRdatafile))
-
 # do separate R scripts for each subtopic
-source(here(paste0(chap,"/HK_CIRCUM.R")))
+source(here(chap,"HK_CIRCUM.R"))
 #Purpose: 	Code circumcision variables
 
 
-source(here(paste0(chap,"/HK_tables_MN.R")))
+source(here(chap,"HK_tables_MN.R"))
 #Purpose: 	Produce tables for indicators computed above. 
 
 # ****************************

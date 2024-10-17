@@ -1,5 +1,5 @@
 # ******************************************************************************
-# Program: 			  HK_RSKY_BHV.R
+# Program: 			  HK_RSKY_BHV.R - DHS8 update
 # Purpose: 			  Code to compute Multiple Sexual Partners, Higher-Risk Sexual Partners, and Condom Use 
 # Data inputs: 		IR and MR datasets
 # Data outputs:		coded variables
@@ -11,21 +11,17 @@
 # Variables created in this file ------------------------------------------------
 #   
 # hk_sex_2plus		"Have two or more sexual partners in the past 12 months"
-# hk_sex_notprtnr		"Had sexual intercourse with a person that is not their spouse and does not live with them in the past 12 months"
+# hk_sex_notprtnr	"Had sexual intercourse with a person that is not their spouse and does not live with them in the past 12 months"
 # hk_cond_2plus		"Have two or more sexual partners in the past 12 months and used a condom at last sex"
 # hk_cond_notprtnr	"Used a condom at last sex with a partner that is not their spouse and does not live with them in the past 12 months"
 # hk_sexprtnr_mean 	"Mean number of sexual partners"
 # 
 # *only among men	
-# hk_paid_sex_ever	"Ever paid for sex among men 15-49"
-# hk_paid_sex_12mo	"Paid for sex in the past 12 months among men 15-49"
-# hk_paid_sex_cond	"Used a condom at last paid sexual intercourse in the past 12 months among men 15-49"
-
 
 # NOTES ------------------------------------------------------------------------
 # For the indicator hk_cond_notprtnr, please see the DHS guide to statistics for changes over time.
 # The current code will only match recent surveys. 					
-# 
+# Several indicators have been discontiued in DHS8. Please check the excel indicator list for these indicators. 
 
 # SETUP ------------------------------------------------------------------------
 
@@ -195,28 +191,3 @@ MRdata <- MRdata %>% mutate(hk_sexprtnr_num = case_when(
     summarise(sexprtnr_mean_wealth = round(weighted.mean(hk_sexprtnr_num, wt, na.rm=TRUE),1))
   
   
-  
- # PAYMENT FOR SEXUAL INTERCOURSE (MEN) ---------------------------------------
-  
-# //Ever paid for sex
-MRdata <- MRdata %>% mutate(hk_paid_sex_ever = case_when(
-  mv791==1 ~ 1,
-  TRUE ~ 0)) %>%
-    set_value_labels(hk_paid_sex_ever = yesno) %>%
-    set_variable_labels(hk_paid_sex_ever ="Ever paid for sex among men 15-49")
-
-# //Paid for sex in the last 12 months
-MRdata <- MRdata %>% mutate(hk_paid_sex_12mo = case_when(
-  mv793==1 ~ 1,
-  TRUE ~ 0)) %>%
-  set_value_labels(hk_paid_sex_12mo = yesno) %>%
-  set_variable_labels(hk_paid_sex_12mo = "Paid for sex in the past 12 months among men 15-49")
-
-# //Used a condom at last paid sex in the last 12 months
-MRdata <- MRdata %>% mutate(hk_paid_sex_cond = case_when(
-  mv793a==1 ~ 1,
-  mv793==1 ~ 0)) %>%
-  set_value_labels(hk_paid_sex_cond = yesno) %>%
-  set_variable_labels(hk_paid_sex_cond = "Used a condom at last paid sexual intercourse in the past 12 months among men 15-49")
-
-

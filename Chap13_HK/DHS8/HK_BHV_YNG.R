@@ -1,5 +1,5 @@
 # /*******************************************************************************************************************************
-# Program: 				HK_BHV_YNG.R
+# Program: 				HK_BHV_YNG.R - No changes in DHS8
 # Data inputs: 		IR or MR datasets
 # Data outputs:		coded variables for sexual behaviors among young people
 # Author:				  Shireen Assaf for code share project
@@ -14,6 +14,8 @@
 # hk_nosex_youth		"Never had sexual intercourse among never-married age 15-24"
 # hk_sex_youth_test	"Had sexual intercourse in the past 12 months and received HIV test and results among those age 15-24"
 
+# NOTES ------------------------------------------------------------------------
+# The indicators below can be computed for men and women. No age selection is made here. 
 
 # SETUP ------------------------------------------------------------------------
 
@@ -24,8 +26,8 @@ yesno <- c("Yes" = 1, "No" = 0)
 # SEXUAL BEHAVIORS AMONG YOUNG PEOPLE (GIRLS AND WOMEN) ------------------------
 # //Sex before 15
 IRdata <- IRdata %>% mutate(hk_sex_15 = case_when(
-  v531 %in% 1:14  & v012 <24 ~ 1,
-  v012 < 24 ~ 0)) %>%
+  v531 %in% 1:14  & v012 <=24 ~ 1,
+  v012 <= 24 ~ 0)) %>%
   set_value_labels(hk_sex_15 = yesno) %>%
   set_variable_labels(hk_sex_15 = "Had sexual intercourse before 15 among age 15-24")
 

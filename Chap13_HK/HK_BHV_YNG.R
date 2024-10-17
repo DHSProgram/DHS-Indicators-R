@@ -4,7 +4,7 @@
 # Data outputs:		coded variables for sexual behaviors among young people
 # Author:				  Shireen Assaf for code share project
 # Translated to R: Courtney Allen
-# Date last modified: September 2022 by Courtney Allen 
+# Date last modified: September 2024 by Courtney Allen 
 # Note:				The indicators are computed for all men. No age selection is made here. 
 # ******************************************************************************
 
@@ -24,8 +24,8 @@ yesno <- c("Yes" = 1, "No" = 0)
 # SEXUAL BEHAVIORS AMONG YOUNG PEOPLE (GIRLS AND WOMEN) ------------------------
 # //Sex before 15
 IRdata <- IRdata %>% mutate(hk_sex_15 = case_when(
-  v531 %in% 1:14  & v012 <24 ~ 1,
-  v012 < 24 ~ 0)) %>%
+  v531 %in% 1:14  & v012 <=24 ~ 1,
+  v012 <= 24 ~ 0)) %>%
   set_value_labels(hk_sex_15 = yesno) %>%
   set_variable_labels(hk_sex_15 = "Had sexual intercourse before 15 among age 15-24")
 

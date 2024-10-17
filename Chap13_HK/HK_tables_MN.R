@@ -22,14 +22,15 @@ expss_digits(digits=1)
 # create workbook
 wb = createWorkbook()
 
-# create age groups for young people for specific tables
-MRdata_young <- MRdata %>% filter(mv013 %in% 1:2)
 
 # TABLES FOR men -------------------------------------------------------------
 
 # create weight
 MRdata <- MRdata %>%
   mutate(wt = mv005/1000000)
+
+# create age groups for young people for specific tables
+MRdata_young <- MRdata %>% filter(mv013 %in% 1:2)
 
 # create table of ever heard of HIV---------------------------------------------
 table_temp <- MRdata %>% 

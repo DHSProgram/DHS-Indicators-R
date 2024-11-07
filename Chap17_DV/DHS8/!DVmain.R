@@ -23,12 +23,12 @@ library(here)       # to get R project path
 here()
 
 # Path for this chapter. This is also where the data is stored
-chap <- "Chap17_DV"
+chap <- "D:/Project/Project/Nepal UNFPA AI Project/development/compiled Data/R/ch17"
 
 # select your survey
 
 # IR Files
-IRdatafile <-  "GMIR81FL.dta"
+IRdatafile <-  "NPIR82FL.dta"
 #AFIR71FL.dta GMIR81FL.dta
  
 # *******************************************************************************************************************************
@@ -50,8 +50,9 @@ source(here(paste0(chap,"/DV_PRTNR.R")))
 source(here(paste0(chap,"/DV_CNTRL.R")))
 # Purpose: 	Calculate violence indicators that have to do with spousal/partner violence and seeking help
  
-source(here("Chap17_DV/DV_tables.R"))
+source(here("Chap17_DV/DHS8/DV_tables.R"))
 # Purpose: 	Produce tables for indicators computed from the above do files.
 
 # *******************************************************************************************************************************
 # *******************************************************************************************************************************
+

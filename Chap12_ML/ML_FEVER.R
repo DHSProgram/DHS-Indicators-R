@@ -4,7 +4,7 @@
 # Data inputs: 		KR survey list
 # Data outputs:		coded variables and tables
 # Author:		Cameron Taylor and Shireen Assaf - translated to R by Mahmoud Elkasabi
-# Date last modified: January 12, 2022 by Mahmoud Elkasabi
+# Date last modified: November 14, 2024 by Mahmoud Elkasabi
 # Notes:	There are similarities between the fever code in this do file and the ARI/Fever code for Chapter 10. 
 # Several indicators (on care and specific antimalarial drugs) are country specific. Please see notes in the code.
 # ******************************************************************************
@@ -53,13 +53,13 @@ KRdata <- KRdata %>%
 # In some surveys traditional practitioner is h32w. Please check the data file using h32*
 KRdata <- KRdata %>%
   mutate(ml_fev_care = case_when(
-    ml_fever==1 & !(h32a==1|h32b==1|h32c==1|h32d==1|h32e==1|h32f==1|h32g==1|h32h==1|h32i==1|h32j==1|
-                     h32k==1|h32l==1|h32m==1|h32n==1|h32o==1|h32p==1|h32q==1|h32r==1|h32s==1|h32u==1|h32v==1|h32w==1|h32x==1) ~ 0,
-    ml_fever==1 & (h32a==1|h32b==1|h32c==1|h32d==1|h32e==1|h32f==1|h32g==1|h32h==1|h32i==1|h32j==1|
-                     h32k==1|h32l==1|h32m==1|h32n==1|h32o==1|h32p==1|h32q==1|h32r==1|h32s==1|h32u==1|h32v==1|h32w==1|h32x==1) ~ 1,
-    b5==0  ~ 99),
-    ml_fev_care = set_label(ml_fev_care, label = "Advice or treatment sought for fever symptoms"))%>%
-  replace_with_na(replace = list(ml_fev_care = c(99)))
+    (ml_fever==1 &  b5==1) & (h32a == 1 | h32b == 1 | h32c == 1 | h32d == 1 | h32e == 1 | h32f == 1 |
+                                h32g == 1 | h32h == 1 | h32i == 1 | h32j == 1 | h32k == 1 | h32l == 1 |
+                                h32m == 1 | h32n == 1 | h32o == 1 | h32p == 1 | h32q == 1 | h32r == 1 |
+                                h32s == 1 |             h32u == 1 | h32v == 1 | h32w == 1 | h32x == 1 )  ~ 1 ,
+    b5==1 & ml_fever==1 ~ 0)) %>%
+  set_value_labels(ml_fev_care = c("Yes" = 1, "No"=0)) %>%
+  set_variable_labels(ml_fev_care = "Advice or treatment sought for fever symptoms")
 
 # Fever care-seeking same or next day
 KRdata <- KRdata %>%

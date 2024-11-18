@@ -19,7 +19,8 @@ table_temp <-  IRdata %>%
     total_row_position = c("below"),
     expss_digits(digits=1)) %>%
   set_caption("Knowledge and ever experienced fistula")
-write.xlsx(table_temp, "Chap19_FS/Tables_FIST.xls", sheetName = "Know_Prev", append=TRUE)
+write.xlsx(table_temp, here(chap,"Tables_FIST.xls"), sheetName = "Know_Prev", append=TRUE)
+
 
 # *************************************************************************************************
 # //Reported cause of fistula and number of days since symptoms began
@@ -34,7 +35,7 @@ table_temp <-  IRdata %>%
     total_row_position = c("below"),
     expss_digits(digits=1)) %>%
   set_caption("Cause of fistula and number of days since symptoms began")
-write.xlsx(table_temp, "Chap19_FS/Tables_FIST.xls", sheetName = "cause_days", append=TRUE)
+write.xlsx(table_temp, here(chap,"Tables_FIST.xls"), sheetName = "cause_days", append=TRUE)
 
 # *************************************************************************************************
 
@@ -49,7 +50,7 @@ table_temp <-  IRdata %>%
     total_row_position = c("below"),
     expss_digits(digits=1)) %>%
   set_caption("Provider type for treatment, outcome of treatment, and operation")
-write.xlsx(table_temp, "Chap19_FS/Tables_FIST.xls", sheetName = "provider_treat", append=TRUE)
+write.xlsx(table_temp, here(chap,"Tables_FIST.xls"), sheetName = "provider_treat", append=TRUE)
 
 # *************************************************************************************************
 # //Reason for not seeking treatment
@@ -64,4 +65,4 @@ table_temp <-  IRdata %>%
     total_row_position = c("below"),
     expss_digits(digits=1)) %>%
   set_caption("Reason for not seeking treatment")
-write.xlsx(table_temp, "Chap19_FS/Tables_FIST.xls", sheetName = "reason_notreat", append=TRUE)
+write.xlsx(table_temp, here(chap,"Tables_FIST.xls"), sheetName = "reason_notreat", append=TRUE)

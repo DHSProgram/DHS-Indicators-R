@@ -33,7 +33,7 @@ library(survey)     # to calculate weighted ratio for GAR
 here()
 
 # path for this chapter. This is also where the data is stored
-chap <- "Chap19_FS"
+chap <- "Chap20_FS"
 
 # select your survey
 

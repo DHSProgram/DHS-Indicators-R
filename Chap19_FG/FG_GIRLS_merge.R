@@ -4,7 +4,7 @@
 # Data inputs: 		IR and BR dataset
 # Data outputs:		coded variables
 # Authors:				Tom Pullum, Trevor Croft, and Shireen Assaf
-# Date last modified: September 26, 2022 by Shireen Assaf 
+# Date last modified: November 2024, by Courtney Allen 26
 # 
 # Note:			Use this file only if information about the daughter's circumcision status is not in the BR file. 
 # 					
@@ -150,7 +150,7 @@ table_temp <-  BRgirls %>%
     total_row_position = c("below"),
     expss_digits(digits=1)) %>%
   set_caption("Age of circumcision by current age")
-write.xlsx(table_temp, "Chap18_FG/Tables_Circum_gl.xls", sheetName = "AgeFC_gl", append=TRUE)
+write.xlsx(table_temp, here("Tables_Circum_gl.xls"), sheetName = "AgeFC_gl", append=TRUE)
 
 # **************************************************************************************************
 # //Prevalence of circumcision by mother's background characteristics
@@ -175,7 +175,7 @@ table_temp <-  BRgirls %>%
     total_row_position = c("below"),
     expss_digits(digits=1)) %>%
   set_caption("Female circumcision for girls age 0-4")
-write.xlsx(table_temp, "Chap18_FG/Tables_Circum_gl.xls", sheetName = "FC_Age0_4", append=TRUE)
+write.xlsx(table_temp, here("Tables_Circum_gl.xls"), sheetName = "FC_Age0_4", append=TRUE)
 
 
 # ***** Among girls age 5-9 *****
@@ -190,7 +190,7 @@ table_temp <-  BRgirls %>%
     total_row_position = c("below"),
     expss_digits(digits=1)) %>%
   set_caption("Female circumcision for girls age 5-9")
-write.xlsx(table_temp, "Chap18_FG/Tables_Circum_gl.xls", sheetName = "FC_Age5_9", append=TRUE)
+write.xlsx(table_temp, here("Tables_Circum_gl.xls"), sheetName = "FC_Age5_9", append=TRUE)
 
 # ***** Among girls age 10-14 *****
 table_temp <-  BRgirls %>% 
@@ -204,7 +204,7 @@ table_temp <-  BRgirls %>%
     total_row_position = c("below"),
     expss_digits(digits=1)) %>%
   set_caption("Female circumcision for girls age 10-14")
-write.xlsx(table_temp, "Chap18_FG/Tables_Circum_gl.xls", sheetName = "FC_Age10_14", append=TRUE)
+write.xlsx(table_temp, here("Tables_Circum_gl.xls"), sheetName = "FC_Age10_14", append=TRUE)
 
 # ***** Among girls age 0-14 : Total *****
 table_temp <-  BRgirls %>% 
@@ -217,7 +217,7 @@ table_temp <-  BRgirls %>%
     total_row_position = c("below"),
     expss_digits(digits=1)) %>%
   set_caption("Female circumcision for girls Total: 0-14")
-write.xlsx(table_temp, "Chap18_FG/Tables_Circum_gl.xls", sheetName = "FC_Age0_14", append=TRUE)
+write.xlsx(table_temp, here("Tables_Circum_gl.xls"), sheetName = "FC_Age0_14", append=TRUE)
 
 # **************************************************************************************************
 # //Person performing the circumcision among women girls 0-14 and type of circumcision
@@ -231,5 +231,4 @@ table_temp <-  BRgirls %>%
     total_row_position = c("below"),
     expss_digits(digits=1)) %>%
   set_caption("Person who performed FC")
-write.xlsx(table_temp, "Chap18_FG/Tables_Circum_gl.xls", sheetName = "Person_gl", append=TRUE)
-
+write.xlsx(table_temp, here("Tables_Circum_gl.xls"), sheetName = "Person_gl", append=TRUE)

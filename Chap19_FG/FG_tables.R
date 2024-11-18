@@ -33,7 +33,8 @@ table_temp <-  IRdata %>%
     total_row_position = c("below"),
     expss_digits(digits=1)) %>%
   set_caption("Knowledge, prevalence, and type of FC among women age 15-49")
-write.xlsx(table_temp, "Chap18_FG/Tables_Circum.xls", sheetName = "Know_Prev_Type_wm", append=TRUE)
+write.xlsx(table_temp, here("Tables_Circum_gl.xls"), sheetName = "Know_Prev_Type_wm", append=TRUE)
+
 
 # ****************************************************
 # //Age at circumcision
@@ -47,7 +48,7 @@ table_temp <-  IRdata %>%
     total_row_position = c("below"),
     expss_digits(digits=1)) %>%
   set_caption("Age at FC among women age 15-49")
-write.xlsx(table_temp, "Chap18_FG/Tables_Circum.xls", sheetName = "AgeFC_wm", append=TRUE)
+write.xlsx(table_temp, here("Tables_Circum_gl.xls"), sheetName = "AgeFC_wm", append=TRUE)
 
 # ****************************************************
 # //Person performing the circumcision among women age 15-49
@@ -61,7 +62,7 @@ table_temp <-  IRdata %>%
     total_row_position = c("below"),
     expss_digits(digits=1)) %>%
   set_caption("Person who performed FC")
-write.xlsx(table_temp, "Chap18_FG/Tables_Circum.xls", sheetName = "Person_wm", append=TRUE)
+write.xlsx(table_temp, here("Tables_Circum_gl.xls"), sheetName = "Person_wm", append=TRUE)
 
 # ****************************************************
 # //Opinion on whether female circumcision is required by their religion or should continue among women
@@ -75,7 +76,7 @@ table_temp <-  IRdata %>%
     total_row_position = c("below"),
     expss_digits(digits=1)) %>%
   set_caption("Opinions on FC among women age 15-49")
-write.xlsx(table_temp, "Chap18_FG/Tables_Circum.xls", sheetName = "Opinions_wm", append=TRUE)
+write.xlsx(table_temp, here("Tables_Circum_gl.xls"), sheetName = "Opinions_wm", append=TRUE)
 
 
 # ****************************************************************************
@@ -93,7 +94,7 @@ table_temp <-  MRdata %>%
     total_row_position = c("below"),
     expss_digits(digits=1)) %>%
   set_caption("Knowledge of FC among men age 15-49")
-write.xlsx(table_temp, "Chap18_FG/Tables_Circum.xls", sheetName = "Know_mn", append=TRUE)
+write.xlsx(table_temp, here("Tables_Circum_gl.xls"), sheetName = "Know_mn", append=TRUE)
 
 # ****************************************************
 
@@ -109,5 +110,5 @@ table_temp <-  MRdata %>%
     total_row_position = c("below"),
     expss_digits(digits=1)) %>%
   set_caption("Opinions on FC among men age 15-49")
-write.xlsx(table_temp, "Chap18_FG/Tables_Circum.xls", sheetName = "Opinions_mn", append=TRUE)
+write.xlsx(table_temp, here("Tables_Circum_gl.xls"), sheetName = "Opinions_mn", append=TRUE)
 

@@ -18,7 +18,7 @@ library(here)
 here()
 
 # Path for this chapter. This is also where the data is stored
-chap <- "Chap16_AM"
+chap <- "Chap17_AM"
 
 #####################################################################################
 ## Define datasets

@@ -64,10 +64,10 @@
 # 	dv_prtnr_viol_none	"Did not experience physical or sexual violence by partner - among women only married once"
 # 	
 # //VIOLENCE BY MARRIAGE DURATION
-# 	dv_marr_viol_0		"Exp"erience of violence by exact marriage duration: before marriage"
-# 	dv_marr_viol_2		"Exp"erience of violence by exact marriage duration: 2 yrs of marriage"
-# 	dv_marr_viol_5		"Exp"erience of violence by exact marriage duration: 5 yrs of marriage"
-# 	dv_marr_viol_10		"Exp"erience of violence by exact marriage duration: 10 yrs of marriage"
+# 	dv_mar_viol_0		"Exp"erience of violence by exact marriage duration: before marriage"
+# 	dv_mar_viol_2		"Exp"erience of violence by exact marriage duration: 2 yrs of marriage"
+# 	dv_mar_viol_5		"Exp"erience of violence by exact marriage duration: 5 yrs of marriage"
+# 	dv_mar_viol_10		"Exp"erience of violence by exact marriage duration: 10 yrs of marriage"
 # 
 # //INITIATION OF SPOUSAL VIOLENCE BY WOMEN
 # 	dv_prtnr_cuts		"Have cuts, bruises, or aches as a result of the violence by partner"

@@ -28,7 +28,7 @@ chap <- "Chap17_DV/DHS8"
 # select your survey
 
 # IR Files
-IRdatafile <-  "ZMIR71FL.dta"
+IRdatafile <-  "GHIR8AFL.dta"
 #AFIR71FL.dta GMIR81FL.dta
  
 # *****************************************************************************

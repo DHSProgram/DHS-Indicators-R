@@ -598,7 +598,7 @@ IRdata <- IRdata %>%
              d119y==0 ~ 1 ,
              d119y==1 & d128==1 ~ 2 ,
              d119y==1 & d128==0 ~ 3,
-             dv_phy_sex_any==1 ~ 0 )) %>% 
+             TRUE ~ NA )) %>% 
   set_value_labels(dv_help_seek = c("Sought help"=1, "Didn't seek help, told someone"=2, "Didn't seek help, didn't tell someone"=3)) %>%
   set_variable_labels(dv_help_seek = "Sought help to stop violence")
 
